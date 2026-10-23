@@ -1,0 +1,433 @@
+{
+  "benchmark": "SojMMLU-30v3",
+  "version": "3.0",
+  "capabilities": {
+    "C": "Code & algorithms",
+    "M": "Mathematics & quantitative reasoning",
+    "L": "Logic & constraint solving",
+    "S": "Science & engineering",
+    "E": "Reading, evidence & decisions"
+  },
+  "questions": [
+    {
+      "id": "C01",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "linked",
+      "question": "What does this **Python 3** program print? The copies are made before any modifications.\n\n```python\nbase = [[1, 2], [3]]\na = base[:]\nb = [row[:] for row in base]\nbase[0].append(4)\na[1].append(base[0][0])\nb[0][0] += len(base[0])\na[0] = [0]\nprint(sum(map(sum, base)), sum(map(sum, a)), sum(map(sum, b)))\n```",
+      "choices": {
+        "A": "9 4 9",
+        "B": "15 4 9",
+        "C": "11 4 9",
+        "D": "11 8 9",
+        "E": "11 4 11"
+      }
+    },
+    {
+      "id": "C02",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "linked",
+      "question": "These SQL tables contain the following rows:\n\n`customers(id)`: 1, 2, 3.\n\n`orders(oid, customer_id, amount, status)`:\n\n| oid | customer_id | amount | status |\n|---:|---:|---:|---|\n|101|1|70|paid|\n|102|1|40|paid|\n|103|1|30|canceled|\n|201|2|90|paid|\n|202|2|20|paid|\n|301|3|30|paid|\n|302|3|45|paid|\n\n`refunds(oid, amount)`: (101,10), (101,5), (201,30), (302,5).\n\nWhat does this **standard SQL** query return? (Format: `id:net; id:net` in ascending id order.)\n\n```sql\nWITH refunds_per_order AS (\n  SELECT oid, SUM(amount) AS refund\n  FROM refunds GROUP BY oid\n)\nSELECT c.id,\n       SUM(o.amount - COALESCE(r.refund, 0)) AS net\nFROM customers c\nJOIN orders o ON o.customer_id = c.id\nLEFT JOIN refunds_per_order r ON r.oid = o.oid\nWHERE o.status = 'paid'\nGROUP BY c.id\nHAVING COUNT(*) >= 2\n   AND SUM(o.amount - COALESCE(r.refund, 0)) >= 80\nORDER BY c.id;\n```",
+      "choices": {
+        "A": "1:95 only",
+        "B": "1:80; 2:80",
+        "C": "1:95; 2:80; 3:70",
+        "D": "1:95; 2:80",
+        "E": "1:110; 2:110"
+      }
+    },
+    {
+      "id": "C03",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "deep",
+      "question": "What does this **Python 3** program print? The recursion counts **ordered** sequences of steps summing to the requested total. A step of size 4 may appear **exactly once**, and two size-3 steps may never be consecutive.\n\n```python\nfrom functools import cache\n@cache\ndef ways(left, used4, prev3):\n    if left == 0:\n        return int(used4 == 1)\n    if left < 0:\n        return 0\n    answer = 0\n    for step in (1, 3, 4):\n        if step == 3 and prev3:\n            continue\n        if step == 4 and used4:\n            continue\n        answer += ways(left-step,\n                       used4 + (step == 4),\n                       step == 3)\n    return answer\nprint(ways(12, 0, False))\n```",
+      "choices": {
+        "A": "44",
+        "B": "106",
+        "C": "64",
+        "D": "68",
+        "E": "69"
+      }
+    },
+    {
+      "id": "C04",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "deep",
+      "question": "A cache has capacity **2** and starts empty. Accesses happen at these integer times (time,key):\n\n`(0,A), (1,B), (2,A), (4,C), (5,B), (6,C), (7,A), (8,B), (10,C), (11,A)`.\n\nRules, applied **in order** at each access:\n1. First remove **all** entries whose expiry time is `<= current time` (an expiry removal is **not** an LRU eviction).\n2. If the key remains cached, this is a hit and makes it most recently used; a hit does **not** change its expiry.\n3. Otherwise it is a miss; if full, evict the least recently used entry, then insert the new key with expiry `current time + 4`.\n4. Insertions also make the inserted key most recently used. No other accesses occur.\n\nWhat is `(hits, misses, LRU evictions, expiry removals)` after all 10 accesses?",
+      "choices": {
+        "A": "(2, 8, 3, 3)",
+        "B": "(2, 8, 2, 4)",
+        "C": "(3, 7, 3, 3)",
+        "D": "(2, 8, 4, 2)",
+        "E": "(3, 7, 2, 3)"
+      }
+    },
+    {
+      "id": "C05",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "synthesis",
+      "question": "A directed graph has **exactly** these weighted edges:\n\n| Edge | Weight | Edge | Weight |\n|---|---:|---|---:|\n| A→B | 6 | B→E | 4 |\n| A→C | 4 | E→D | 3 |\n| B→D | 5 | D→F | 8 |\n| C→D | 9 | D→G | 5 |\n| C→E | 6 | F→H | 4 |\n| E→G | 9 | G→H | 7 |\n\nTravel from A to H on directed edges, visiting D **at least once**. You may apply **at most one coupon**, reducing the charge for one traversed edge of weight w to `floor(w/2)`. Every other edge is charged normally. Paths with different sequences of vertices count as different paths; using the coupon on different edges of the same vertex sequence does **not** create another distinct path.\n\nWhat is `(minimum total charge, number of distinct vertex-paths achieving that minimum)`?",
+      "choices": {
+        "A": "(21, 3)",
+        "B": "(18, 1)",
+        "C": "(19, 2)",
+        "D": "(20, 2)",
+        "E": "(19, 1)"
+      }
+    },
+    {
+      "id": "C06",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "synthesis",
+      "question": "Consider the following pseudocode for any integer `n >= 2`, where `work()` takes constant time and no calls are optimized away:\n\n```text\nfor i = 1 to n:\n    j = i\n    while j > 0:\n        k = 1\n        while k <= j:\n            work()\n            k = 2 * k\n        j = floor(j / 2)\n```\n\nWhat is `(the exact number of work() calls when n = 16, the tight asymptotic running time in n)`?",
+      "choices": {
+        "A": "(126, Theta(n log n))",
+        "B": "(126, Theta(n (log n)^2))",
+        "C": "(120, Theta(n (log n)^2))",
+        "D": "(136, Theta(n (log n)^2))",
+        "E": "(126, Theta((log n)^3))"
+      }
+    },
+    {
+      "id": "M01",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "linked",
+      "question": "First choose urn A with probability `2/3`, or urn B with probability `1/3`.\n\n- Urn A contains **3 red** and **2 blue** balls.\n- Urn B contains **2 red** and **4 blue** balls.\n\nDraw **two balls without replacement** from whichever urn was chosen. You observe **exactly one red** among the two drawn balls, but you are not told which urn was chosen.\n\nWhat is the posterior probability that urn A was chosen?",
+      "choices": {
+        "A": "3/4",
+        "B": "8/13",
+        "C": "9/13",
+        "D": "2/3",
+        "E": "3/5"
+      }
+    },
+    {
+      "id": "M02",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "linked",
+      "question": "A well-mixed tank holds exactly **60 liters** of solution, initially **30% acid by volume**.\n\n1. Remove **20 liters** of the mixture and replace it with **20 liters of pure water**, mixing thoroughly.\n2. Then remove **10 liters** of the resulting mixture and replace it with **10 liters of 40% acid solution**, again mixing thoroughly.\n\nAssume volumes add exactly. What is the final percentage of acid in the 60-liter tank?",
+      "choices": {
+        "A": "21 2/3%",
+        "B": "25%",
+        "C": "28 1/3%",
+        "D": "23 1/3%",
+        "E": "20%"
+      }
+    },
+    {
+      "id": "M03",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "deep",
+      "question": "A game has three progress stages, numbered 0, 1, 2. At each trial:\n\n- In stage 0, you advance to stage 1 with probability 0.6; otherwise you stay at stage 0.\n- In stage 1, you advance to stage 2 with probability 0.5; otherwise you restart at stage 0.\n- In stage 2, you **finish** with probability 0.4; otherwise you restart at stage 0.\n\nTrials are independent conditional on the current stage, and each trial costs one turn. Starting at stage 0, what is the **exact expected number of trials to finish**?",
+      "choices": {
+        "A": "95/6",
+        "B": "50/3",
+        "C": "40/3",
+        "D": "55/3",
+        "E": "15"
+      }
+    },
+    {
+      "id": "M04",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "deep",
+      "question": "A workshop needs to buy **at least 35 usable units**. Packs have fixed capacities, prices, and purchase limits:\n\n| Pack | Units | Price | Maximum packs |\n|---|---:|---:|---:|\n| X | 6 | $13 | 4 |\n| Y | 9 | $20 | 3 |\n| Z | 14 | $32 | 2 |\n\nA **single $10 coupon** is applied to the total purchase **only if** the workshop buys at most **three packs in total** and receives at least 35 units. No other discounts, shipping, or taxes apply. Surplus units are allowed. What is the **minimum total cost**?",
+      "choices": {
+        "A": "$84",
+        "B": "$74",
+        "C": "$78",
+        "D": "$69",
+        "E": "$79"
+      }
+    },
+    {
+      "id": "M05",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "synthesis",
+      "question": "A binary ring has **14 numbered positions**, 1 through 14, with position 14 adjacent to position 1. Count binary assignments satisfying **all** rules:\n\n- Exactly five positions contain a 1.\n- No two adjacent positions (including 14 and 1) both contain 1.\n- **Exactly one** of positions 1 and 8 contains 1.\n- Assignments are distinguished by their numbered positions; rotations are **not** identified with one another.\n\nHow many assignments satisfy the rules?",
+      "choices": {
+        "A": "88",
+        "B": "90",
+        "C": "98",
+        "D": "84",
+        "E": "92"
+      }
+    },
+    {
+      "id": "M06",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "synthesis",
+      "question": "A path starts at `(0,0)` and ends at `(7,6)`. The allowed steps are **right** `(1,0)`, **up** `(0,1)`, or **diagonal** `(1,1)`. Count paths satisfying **every** condition:\n\n- Use the diagonal step **exactly once**.\n- **Never visit** a lattice point with `y > x`.\n- **Visit** `(3,2)` at least once.\n- **Never visit** `(2,2)` or `(5,4)`.\n\nA path is distinguished by its ordered sequence of steps. How many valid paths exist?",
+      "choices": {
+        "A": "209",
+        "B": "179",
+        "C": "196",
+        "D": "199",
+        "E": "189"
+      }
+    },
+    {
+      "id": "L01",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "linked",
+      "question": "Five switches P, Q, R, S, T are each ON or OFF. All five statements below must hold:\n\n1. Exactly **three** switches are ON.\n2. If P is ON, then R is ON.\n3. Q and S cannot both be ON.\n4. T is ON **if and only if exactly one** of P and Q is ON.\n5. At least one of R and S is ON.\n\nHow many different switch assignments satisfy all five requirements?",
+      "choices": {
+        "A": "4",
+        "B": "5",
+        "C": "1",
+        "D": "3",
+        "E": "2"
+      }
+    },
+    {
+      "id": "L02",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "linked",
+      "question": "The six distinct tasks A, B, C, D, E, F must be scheduled exactly once each. Every condition applies:\n\n- B is **immediately before** D.\n- A is before C.\n- D is before E.\n- F is before E.\n- C is **not** the final task.\n\nHow many of the 6! possible orders satisfy all five constraints?",
+      "choices": {
+        "A": "12",
+        "B": "14",
+        "C": "10",
+        "D": "8",
+        "E": "16"
+      }
+    },
+    {
+      "id": "L03",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "deep",
+      "question": "Exactly one of five people, A, B, C, D, E, is the culprit. Each makes one statement about the culprit:\n\n- A: \"The culprit is **A, B, or D**.\"\n- B: \"The culprit is **A**.\"\n- C: \"The culprit is **not E**.\"\n- D: \"The culprit is **C or E**.\"\n- E: \"The culprit is **D**.\"\n\nYou know that **exactly two statements are true**, and **the culprit's own statement is false**. Who is the culprit?",
+      "choices": {
+        "A": "C",
+        "B": "B",
+        "C": "E",
+        "D": "A",
+        "E": "D"
+      }
+    },
+    {
+      "id": "L04",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "deep",
+      "question": "A secret five-digit code has distinct digits A, B, C, D, E, in that order, each chosen from **1 through 9** (no zero). The clues are:\n\n- `A+B+C+D+E = 28`.\n- `B = 2*D`.\n- `A = E+1`.\n- `A+C = 16`.\n\nWhich is the **only** five-digit code satisfying all four clues?",
+      "choices": {
+        "A": "94726",
+        "B": "74926",
+        "C": "76942",
+        "D": "74962",
+        "E": "76924"
+      }
+    },
+    {
+      "id": "L05",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "synthesis",
+      "question": "Six distinct tasks A, B, C, D, E, F must be completed exactly once each, subject to these five constraints:\n\n1. A occurs before D.\n2. B and C must be **adjacent in either order**.\n3. E is neither first nor last.\n4. F occurs **after** D.\n5. **Exactly one** of the following is true: \"B occurs before A\" and \"C occurs before E\".\n\nHow many valid orders are there?",
+      "choices": {
+        "A": "4",
+        "B": "8",
+        "C": "10",
+        "D": "12",
+        "E": "6"
+      }
+    },
+    {
+      "id": "L06",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "synthesis",
+      "question": "Six switches A, B, C, D, E, F are each ON or OFF. All rules hold:\n\n- Exactly **three** switches are ON.\n- If A is ON, then C is ON.\n- D is ON **if and only if neither B nor E is ON**.\n- F is ON **if and only if exactly one of A and B is ON**.\n- C and D cannot both be ON.\n- At least one of E and F is ON.\n\nWhich option lists **all possible ON-sets**, with no missing or extra assignments?",
+      "choices": {
+        "A": "{BCF, BEF, DEF}",
+        "B": "{BCF, BEF}",
+        "C": "{BEF}",
+        "D": "{BCF, CEF}",
+        "E": "{ACF, BEF}"
+      }
+    },
+    {
+      "id": "S01",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "linked",
+      "question": "An ideal **18 V** battery drives a **4-ohm series resistor** followed by a branch of **6-ohm and 3-ohm resistors in parallel**. Wires and battery have no losses. What is `(power dissipated in the 3-ohm resistor, total electrical power supplied by the battery)`?",
+      "choices": {
+        "A": "(12 W, 54 W)",
+        "B": "(9 W, 54 W)",
+        "C": "(12 W, 36 W)",
+        "D": "(9 W, 36 W)",
+        "E": "(18 W, 54 W)"
+      }
+    },
+    {
+      "id": "S02",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "linked",
+      "question": "Mix the following **ideal strong electrolytes** at a fixed final temperature, assuming complete dissociation, exact additive liquid volumes, and complete neutralization of H+ by OH−:\n\n- 300 mL of **0.40 M HCl**.\n- 250 mL of **0.30 M NaOH**.\n- 150 mL of **0.20 M KOH**.\n\nIgnore water autoionization relative to remaining acid/base. What is `(moles of H+ left after neutralization, final H+ concentration)`?",
+      "choices": {
+        "A": "(0.015 mol, 3/110 M)",
+        "B": "(0.045 mol, 9/140 M)",
+        "C": "(0.030 mol, 3/70 M)",
+        "D": "(0 mol, 0 M)",
+        "E": "(0.015 mol, 3/140 M)"
+      }
+    },
+    {
+      "id": "S03",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "deep",
+      "question": "A **1,200 kg electric vehicle** begins at rest. It accelerates uniformly to **20 m/s in 10 s**, cruises at 20 m/s for **30 s**, then brakes uniformly to rest in **5 s**.\n\nAssume zero air and rolling drag during acceleration and braking. Driving during acceleration converts battery electricity to kinetic energy at **80% efficiency**. Electrical power during the cruise phase is a constant **6 kW**. During braking, the vehicle recovers **50% of its lost kinetic energy as battery electricity**. Ignore all other gains and losses.\n\nWhat is `(total distance traveled, net battery energy consumed)`?",
+      "choices": {
+        "A": "(750 m, 0.12 kWh)",
+        "B": "(700 m, 0.10 kWh)",
+        "C": "(750 m, 0.10 kWh)",
+        "D": "(800 m, 0.10 kWh)",
+        "E": "(750 m, 0.15 kWh)"
+      }
+    },
+    {
+      "id": "S04",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "deep",
+      "question": "An insulated vessel contains **250 g of ice at -10 °C**. Add **500 g of liquid water at 60 °C** and a **100 g copper block at 60 °C**. Initially the ice is separate from the warm water and copper; at equilibrium all three exchange heat. Assume no heat loss, no evaporation, and constant heat capacities:\n\n- Ice specific heat: `2.1 J/(g·°C)`.\n- Liquid water specific heat: `4.2 J/(g·°C)`.\n- Copper specific heat: `0.39 J/(g·°C)`.\n- Ice latent heat of fusion: `334 J/g`.\n\nWhat is the final equilibrium temperature, rounded to **two decimals**?",
+      "choices": {
+        "A": "8.41 °C",
+        "B": "12.41 °C",
+        "C": "15.30 °C",
+        "D": "0.00 °C",
+        "E": "11.92 °C"
+      }
+    },
+    {
+      "id": "S05",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "synthesis",
+      "question": "An online measurement service works only if **all three independent subsystems** work:\n\n1. The **single shared power supply** works with probability `0.95`.\n2. At least **one of two redundant controllers** works; their independent success probabilities are `0.90` and `0.85`.\n3. At least **two of three sensors** work; their independent success probabilities are `0.90`, `0.80`, and `0.70`.\n\nThe supply, controllers, and sensors are mutually independent. What is the probability that the **whole service** works, rounded to **two decimal percentage points**?",
+      "choices": {
+        "A": "90.20%",
+        "B": "80.01%",
+        "C": "85.50%",
+        "D": "82.80%",
+        "E": "84.40%"
+      }
+    },
+    {
+      "id": "S06",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "synthesis",
+      "question": "A batched LLM server receives **four requests simultaneously**. GPU prefill processes all **4,000 input tokens** at exactly **50,000 input tokens/s** before any decoding begins. The four requests then require **60, 80, 100, 120 output tokens** respectively.\n\nDecoding happens in synchronous iterations: **each active request produces exactly one token in every iteration**. Once a request has produced its required number of output tokens, it immediately leaves the batch. Iteration latency equals `12 ms + 3 ms × number of active requests` (the active count is measured before each iteration). All requests were admitted together and decoding cannot overlap with prefill; there is no other overhead.\n\nWhat is `(total wall-clock time to finish all requests, aggregate output-token throughput including prefill)`?",
+      "choices": {
+        "A": "(3.04 s, about 118.4 tok/s)",
+        "B": "(2.72 s, about 132.4 tok/s)",
+        "C": "(2.52 s, about 142.9 tok/s)",
+        "D": "(2.60 s, about 138.5 tok/s)",
+        "E": "(2.60 s, about 120.0 tok/s)"
+      }
+    },
+    {
+      "id": "E01",
+      "domain": "E",
+      "domain_name": "Reading, evidence & decisions",
+      "tier": "linked",
+      "question": "At deployment, **70%** of examples belong to group A and **30%** to group B. The disease/positive-class prevalence is **5% in group A** and **30% in group B**. A detector has:\n\n| Group | Sensitivity | False-positive rate |\n|---|---:|---:|\n| A | 90% | 10% |\n| B | 80% | 5% |\n\nAssume those rates remain unchanged at deployment. If an alarm is called a positive prediction, what are the **overall deployment precision and recall**, in that order, rounded to **two decimal percentage points**?",
+      "choices": {
+        "A": "(57.34%, 88.00%)",
+        "B": "(59.89%, 82.80%)",
+        "C": "(57.34%, 82.80%)",
+        "D": "(82.80%, 57.34%)",
+        "E": "(50.00%, 85.00%)"
+      }
+    },
+    {
+      "id": "E02",
+      "domain": "E",
+      "domain_name": "Reading, evidence & decisions",
+      "tier": "linked",
+      "question": "On a week with **no holidays**, access requests are submitted on **Monday**. Requests made **before 16:00** are reviewed Monday; those submitted **at/after 16:00** are reviewed Tuesday.\n\nPolicy at the **review time**:\n- Employees need valid **manager** approval; contractors need valid **sponsor** approval.\n- Access to a **confidential** project also requires security training completed **no more than 180 days before** the review day. Nonconfidential projects require no training.\n- Approvals remain valid **through the end of the third calendar day after issue**. For example, an approval issued Friday is valid through Monday but not Tuesday.\n- Suspended accounts are **always denied**.\n\nWhich applicants are approved?\n\n| Applicant | Type / state | Project | Mon request | Relevant approval issued | Training at review |\n|---|---|---|---|---|---|\n| A | Employee, active | Confidential | 15:00 | Previous Friday | 30 days old |\n| B | Contractor, active | Nonconfidential | 17:00 | Previous Friday | Not applicable |\n| C | Employee, active | Nonconfidential | 14:00 | Previous Thursday | Not applicable |\n| D | Contractor, active | Confidential | 15:00 | Monday | 181 days old |\n| E | Employee, active | Confidential | 18:00 | Monday | 1 day old |\n| F | Contractor, suspended | Nonconfidential | 14:00 | Monday | Not applicable |",
+      "choices": {
+        "A": "A and E",
+        "B": "A and B",
+        "C": "E only",
+        "D": "B and E",
+        "E": "A, D and E"
+      }
+    },
+    {
+      "id": "E03",
+      "domain": "E",
+      "domain_name": "Reading, evidence & decisions",
+      "tier": "deep",
+      "question": "A randomized trial has two prespecified strata G1 and G2. Outcomes are binary successes/failures, but some randomized participants have **missing outcomes**. Within each arm and stratum, every missing outcome could be either success or failure.\n\n| Stratum | Arm | Randomized | Observed successes | Observed failures | Missing |\n|---|---|---:|---:|---:|---:|\n| G1 | Treatment | 40 | 28 | 8 | 4 |\n| G1 | Control | 40 | 24 | 14 | 2 |\n| G2 | Treatment | 60 | 32 | 20 | 8 |\n| G2 | Control | 60 | 38 | 15 | 7 |\n\nTo estimate the possible **treatment minus control success-rate difference** for a new population, weight **G1 by 60% and G2 by 40%** (apply these weights to rates, **not** raw counts).\n\nWhat is the **tightest possible interval** for the weighted treatment-minus-control difference, in percentage points, rounded to two decimals?",
+      "choices": {
+        "A": "[-1.00, +19.00]",
+        "B": "[-5.67, +19.00]",
+        "C": "[-6.67, +11.33]",
+        "D": "[-5.67, +13.33]",
+        "E": "[+0.00, +13.33]"
+      }
+    },
+    {
+      "id": "E04",
+      "domain": "E",
+      "domain_name": "Reading, evidence & decisions",
+      "tier": "deep",
+      "question": "A marketing team compares two campaigns. For each campaign, conversions have a **refund probability** depending on the customer group; a refunded conversion produces **no contribution margin**. Margins below apply only to **nonrefunded** conversions.\n\n| Campaign | Premium visitors / conversion | Basic visitors / conversion | Premium refund | Basic refund | Campaign spend |\n|---|---|---|---:|---:|---:|\n| X | 400 at 15% | 1,100 at 4% | 10% | 20% | $1,700 |\n| Y | 500 at 13% | 1,000 at 5% | 5% | 20% | $1,950 |\n\nEach retained **premium conversion yields $30** contribution margin; each retained **basic conversion yields $10**. Assume the reported probabilities are exact, and choose the campaign with **higher expected net contribution** after subtracting its spend.\n\nWhich campaign wins, and by how much?",
+      "choices": {
+        "A": "X by $30.50",
+        "B": "X by $60.00",
+        "C": "Y by $30.50",
+        "D": "Y by $60.00",
+        "E": "Y by $10.00"
+      }
+    },
+    {
+      "id": "E05",
+      "domain": "E",
+      "domain_name": "Reading, evidence & decisions",
+      "tier": "synthesis",
+      "question": "A threat is present on **8%** of occasions. Two tests are used in sequence. Given whether the threat is really present, their errors are **conditionally independent**:\n\n| Test | Sensitivity P(+|threat) | False-positive P(+|no threat) |\n|---|---:|---:|\n| T1 | 90% | 10% |\n| T2 | 85% | 20% |\n\n**Both tests return positive.** You must choose one action:\n\n- **Intervene:** costs 75 if there is no threat; costs 5 if there is a threat.\n- **Do not intervene:** costs 0 if there is no threat; costs 30 if there is a threat.\n\nChoose the lower-expected-cost action. Which is `(exact posterior P(threat|both positive), best action)`?",
+      "choices": {
+        "A": "(9/23, intervene)",
+        "B": "(153/199, do not intervene)",
+        "C": "(9/23, do not intervene)",
+        "D": "(153/200, intervene)",
+        "E": "(153/199, intervene)"
+      }
+    },
+    {
+      "id": "E06",
+      "domain": "E",
+      "domain_name": "Reading, evidence & decisions",
+      "tier": "synthesis",
+      "question": "A company must select **exactly one** supplier, purchasing the fixed listed batch from that supplier. Units are independently defective at the stated rate. The purchase must deliver at least **1,015 good units in expectation**. The company pays for all ordered units, plus shipping, but receives a **$0.50 refund for each defective unit**. Choose the **lowest expected net purchase cost among feasible suppliers**.\n\n| Supplier | Units | Unit price | Defect probability | Shipping |\n|---|---:|---:|---:|---:|\n| A | 1,100 | $2.00 | 8% | $80 |\n| B | 1,050 | $2.25 | 3% | $100 |\n| C | 1,200 | $1.95 | 10% | $180 |\n\nWhich is `(selected supplier, expected net purchase cost including shipping and refunds)`?",
+      "choices": {
+        "A": "(B, $2,446.75)",
+        "B": "(C, $2,400.00)",
+        "C": "(A, $2,236.00)",
+        "D": "(C, $2,460.00)",
+        "E": "(B, $2,462.50)"
+      }
+    }
+  ]
+}
