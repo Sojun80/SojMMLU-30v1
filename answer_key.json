@@ -1,0 +1,126 @@
+{
+  "benchmark": "SojMMLU-30v1",
+  "version": "1.0",
+  "answers": {
+    "C01": {
+      "answer": "D",
+      "explanation": "a is [5,2,3] (sum 10); c is [1,2,3,5] (sum 11)."
+    },
+    "C02": {
+      "answer": "A",
+      "explanation": "Four qualifying rows, three non-NULL values, and two distinct non-NULL values."
+    },
+    "C03": {
+      "answer": "E",
+      "explanation": "The values f(0)..f(5) are 0, 1, 1, 3, 5, 11."
+    },
+    "C04": {
+      "answer": "B",
+      "explanation": "The total work is 1+2+4+... up to less than n, which is Theta(n)."
+    },
+    "C05": {
+      "answer": "C",
+      "explanation": "The sliding window's left edge cannot move backward: max(left, last[ch]+1)."
+    },
+    "C06": {
+      "answer": "B",
+      "explanation": "A->C->B->D->F and A->C->B->E->D->F both have weight 10."
+    },
+    "M01": {
+      "answer": "C",
+      "explanation": "Two of the five equally likely ordered rolls totaling 8 contain a 3."
+    },
+    "M02": {
+      "answer": "E",
+      "explanation": "x=5, y=2, and x^2-y^2=25-4=21."
+    },
+    "M03": {
+      "answer": "B",
+      "explanation": "Bayes' rule: .009/(.009+.99*.05)=.009/.0585=2/13."
+    },
+    "M04": {
+      "answer": "A",
+      "explanation": "Mean 4; sum of squared deviations 8; sample variance 8/3."
+    },
+    "M05": {
+      "answer": "D",
+      "explanation": "Choose two evens, two odds, arrange: 10*10*24=2400; subtract 240 arrangements starting with 0, yielding 2160."
+    },
+    "M06": {
+      "answer": "D",
+      "explanation": "157 satisfies all three. The solution is unique modulo 5*7*9=315, and 157 is in [0,314]."
+    },
+    "L01": {
+      "answer": "A",
+      "explanation": "An existing raal is a sil, and nothing that is a sil can be a zek."
+    },
+    "L02": {
+      "answer": "C",
+      "explanation": "A,C,B,D is the only option with A before C, B immediately before D, and C not last."
+    },
+    "L03": {
+      "answer": "D",
+      "explanation": "Assuming B is true makes C false, which makes A false and is consistent. The other cases are inconsistent."
+    },
+    "L04": {
+      "answer": "E",
+      "explanation": "If Q were ON, R would be OFF, forcing P OFF and contradicting exactly two ON. Hence P and R ON, Q OFF."
+    },
+    "L05": {
+      "answer": "B",
+      "explanation": "Statements 1 and 4 are true; 2 and 3 are false, giving exactly two true statements."
+    },
+    "L06": {
+      "answer": "C",
+      "explanation": "The count is binomial(8-3+1,3)=binomial(6,3)=20."
+    },
+    "S01": {
+      "answer": "E",
+      "explanation": "The branch currents are 12/3=4 A and 12/6=2 A, totaling 6 A."
+    },
+    "S02": {
+      "answer": "B",
+      "explanation": "Two moles of oxygen consume four moles of H2 to yield four moles of water."
+    },
+    "S03": {
+      "answer": "A",
+      "explanation": "P(aa)=1/4; P(BB or Bb)=3/4; product=3/16."
+    },
+    "S04": {
+      "answer": "C",
+      "explanation": "The parent isotope's remaining fraction is 20/80=1/4, corresponding to two half-lives."
+    },
+    "S05": {
+      "answer": "D",
+      "explanation": "First item completes at t=10 ms; the second stage remains the bottleneck and finishes each subsequent item 7 ms later: 10+9*7=73."
+    },
+    "S06": {
+      "answer": "A",
+      "explanation": "P(at least two flips)=3*(0.1)^2*(0.9)+(0.1)^3=0.028=2.8%."
+    },
+    "E01": {
+      "answer": "B",
+      "explanation": "At 16:00 the second-business-day rule applies: Friday is first, Monday second."
+    },
+    "E02": {
+      "answer": "D",
+      "explanation": "20/200=10%; 18/120=15%; B exceeds A by 5 percentage points."
+    },
+    "E03": {
+      "answer": "C",
+      "explanation": "The observational data establish a mean difference, not a causal effect."
+    },
+    "E04": {
+      "answer": "E",
+      "explanation": "Not being reviewed by all four implies that for every manuscript at least one editor did not review it."
+    },
+    "E05": {
+      "answer": "A",
+      "explanation": "B beats A in mild (95%>90%) and severe (70%>10%); A beats B overall (91/110>89/120)."
+    },
+    "E06": {
+      "answer": "E",
+      "explanation": "Some after-noon entries were invalidated, and no invalidated entry can be served."
+    }
+  }
+}
