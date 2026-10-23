@@ -9,7 +9,7 @@ import urllib.request
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-PATTERN = re.compile(r"(?im)^\\s*ANSWER\\s*:\\s*([A-E])\\s*$")
+PATTERN = re.compile(r"(?im)^\s*ANSWER\s*:\s*([A-E])\s*$")
 SYSTEM = "Solve the multiple-choice question carefully. Your final line must be exactly ANSWER: X, where X is one of A, B, C, D, E. Do not append anything after the final line."
 
 def request(url, payload, token, timeout):
