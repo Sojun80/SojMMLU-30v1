@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SojMMLU-30 v1: dependency-free OpenAI-compatible benchmark runner."""
+"""SojMMLU-30 v1/v2: dependency-free OpenAI-compatible benchmark runner."""
 import argparse
 import json
 import re
@@ -21,9 +21,10 @@ def request(url, payload, token, timeout):
     with urllib.request.urlopen(req, timeout=timeout) as response:
         return json.loads(response.read().decode("utf-8"))
 
-def grade(records, keys):
+def grade(records, keys, version):
     groups = {g: {"correct": 0, "total": 0, "answered": 0, "errors": 0} for g in "CMLSE"}
-    tiers = {t: {"correct": 0, "total": 0, "answered": 0, "errors": 0} for t in ("basic", "applied", "stretch")}
+    tier_names = ("basic", "applied", "stretch") if version == "v1" else ("moderate", "hard", "challenge")
+    tiers = {t: {"correct": 0, "total": 0, "answered": 0, "errors": 0} for t in tier_names}
     for r in records:
         correct = r["answer"] == keys[r["id"]]["answer"]
         for d in (groups[r["domain"]], tiers[r["tier"]]):
@@ -36,19 +37,23 @@ def grade(records, keys):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--version", choices=("v1", "v2"), default="v1", help="Benchmark version (default v1)")
     ap.add_argument("--endpoint", default="http://127.0.0.1:8001/v1")
     ap.add_argument("--model", required=True)
     ap.add_argument("--subset", choices=("smoke", "full"), default="full")
-    ap.add_argument("--output", default="sojmmlu-results.json")
+    ap.add_argument("--output", default=None, help="Result JSON path; defaults to sojmmlu-VERSION-results.json")
     ap.add_argument("--max-tokens", type=int, default=4096)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--timeout", type=float, default=120.0)
     ap.add_argument("--api-key", default="")
     args = ap.parse_args()
-    questions = json.loads((HERE / "questions.json").read_text())["questions"]
-    keys = json.loads((HERE / "answer_key.json").read_text())["answers"]
+    base = HERE if args.version == "v1" else HERE / "v2"
+    questions = json.loads((base / "questions.json").read_text())["questions"]
+    keys = json.loads((base / "answer_key.json").read_text())["answers"]
     if args.subset == "smoke":
-        questions = [q for q in questions if q["tier"] == "basic"]
+        baseline_tier = "basic" if args.version == "v1" else "moderate"
+        questions = [q for q in questions if q["tier"] == baseline_tier]
+    output_path = Path(args.output) if args.output else Path(f"sojmmlu-{args.version}-results.json")
     records = []
     t0 = time.monotonic()
     for q in questions:
@@ -75,11 +80,11 @@ def main():
         rec["elapsed_seconds"] = round(time.monotonic() - started, 3)
         records.append(rec)
         print(f'{q["id"]}: {rec["answer"] or "-"} ({rec["error"] or "ok"}; {rec["elapsed_seconds"]:.1f}s)', flush=True)
-    summary = grade(records, keys)
-    report = {"benchmark": "SojMMLU-30v1", "model": args.model, "endpoint": args.endpoint, "subset": args.subset, "temperature": args.temperature, "max_tokens": args.max_tokens, "total_elapsed_seconds": round(time.monotonic() - t0, 3), "summary": summary, "records": records}
-    Path(args.output).write_text(json.dumps(report, indent=2) + "\n")
+    summary = grade(records, keys, args.version)
+    report = {"benchmark": f"SojMMLU-30{args.version}", "version": args.version, "model": args.model, "endpoint": args.endpoint, "subset": args.subset, "temperature": args.temperature, "max_tokens": args.max_tokens, "total_elapsed_seconds": round(time.monotonic() - t0, 3), "summary": summary, "records": records}
+    output_path.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(summary, indent=2))
-    print("Saved:", args.output)
+    print("Saved:", output_path)
 
 if __name__ == "__main__":
     main()
