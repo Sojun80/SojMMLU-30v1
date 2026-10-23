@@ -52,7 +52,7 @@ def main():
     records = []
     t0 = time.monotonic()
     for q in questions:
-        prompt = q["question"] + "\\n\\n" + "\\n".join(k + ". " + v for k, v in q["choices"].items())
+        prompt = q["question"] + "\n\n" + "\n".join(k + ". " + v for k, v in q["choices"].items())
         payload = {"model": args.model, "temperature": args.temperature, "max_tokens": args.max_tokens, "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}]}
         started = time.monotonic()
         rec = {"id": q["id"], "domain": q["domain"], "tier": q["tier"], "answer": None, "finish_reason": None, "usage": None, "response": None, "error": None}
@@ -77,7 +77,7 @@ def main():
         print(f'{q["id"]}: {rec["answer"] or "-"} ({rec["error"] or "ok"}; {rec["elapsed_seconds"]:.1f}s)', flush=True)
     summary = grade(records, keys)
     report = {"benchmark": "SojMMLU-30v1", "model": args.model, "endpoint": args.endpoint, "subset": args.subset, "temperature": args.temperature, "max_tokens": args.max_tokens, "total_elapsed_seconds": round(time.monotonic() - t0, 3), "summary": summary, "records": records}
-    Path(args.output).write_text(json.dumps(report, indent=2) + "\\n")
+    Path(args.output).write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(summary, indent=2))
     print("Saved:", args.output)
 
