@@ -1,0 +1,434 @@
+{
+  "benchmark": "SojMMLU-30v1",
+  "version": "1.0",
+  "license_note": "Original questions",
+  "groups": {
+    "C": "Code & algorithms",
+    "M": "Mathematics & quantitative reasoning",
+    "L": "Logic & constraint solving",
+    "S": "Science & engineering",
+    "E": "Reading, evidence & data interpretation"
+  },
+  "questions": [
+    {
+      "id": "C01",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "basic",
+      "question": "What does this Python 3 program print?\n\n```python\na = [1, 2, 3]\nb = a\nc = a[:]\n\nb[0] = 5\nc.append(a[0])\n\nprint(sum(a), sum(c))\n```",
+      "choices": {
+        "A": "6 11",
+        "B": "10 10",
+        "C": "10 15",
+        "D": "10 11",
+        "E": "6 7"
+      }
+    },
+    {
+      "id": "C02",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "basic",
+      "question": "A SQL table `events(user_id, points)` contains:\n\n| user_id | points |\n|---:|---:|\n| 1 | 10 |\n| 1 | NULL |\n| 2 | 10 |\n| 3 | 20 |\n| 4 | NULL |\n\nWhat single row does this query return?\n\n```sql\nSELECT COUNT(*), COUNT(points), COUNT(DISTINCT points)\nFROM events\nWHERE user_id <= 3;\n```",
+      "choices": {
+        "A": "(4, 3, 2)",
+        "B": "(4, 4, 3)",
+        "C": "(3, 3, 2)",
+        "D": "(4, 2, 2)",
+        "E": "(3, 2, 2)"
+      }
+    },
+    {
+      "id": "C03",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "applied",
+      "question": "What does this Python 3 program print?\n\n```python\ndef f(n):\n    if n < 2:\n        return n\n    return f(n - 1) + 2 * f(n - 2)\n\nprint(f(5))\n```",
+      "choices": {
+        "A": "7",
+        "B": "9",
+        "C": "10",
+        "D": "13",
+        "E": "11"
+      }
+    },
+    {
+      "id": "C04",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "applied",
+      "question": "Assume `work()` takes constant time and `n` is an integer greater than 1. What is the tight time complexity?\n\n```python\ni = 1\nwhile i < n:\n    for j in range(i):\n        work()\n    i *= 2\n```",
+      "choices": {
+        "A": "Theta(log n)",
+        "B": "Theta(n)",
+        "C": "Theta(n log n)",
+        "D": "Theta(n^2)",
+        "E": "Theta(2^n)"
+      }
+    },
+    {
+      "id": "C05",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "stretch",
+      "question": "This Python 3 function intends to return the length of the longest substring without repeated characters, but the marked line is wrong. Which single replacement fixes it for every string?\n\n```python\ndef longest_unique(s):\n    last = {}\n    left = best = 0\n    for right, ch in enumerate(s):\n        if ch in last:\n            left = last[ch] + 1  # BUG\n        last[ch] = right\n        best = max(best, right - left + 1)\n    return best\n```",
+      "choices": {
+        "A": "left = min(left, last[ch] + 1)",
+        "B": "left = right",
+        "C": "left = max(left, last[ch] + 1)",
+        "D": "left = max(left, last[ch])",
+        "E": "left = last[ch]"
+      }
+    },
+    {
+      "id": "C06",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "stretch",
+      "question": "A directed graph has exactly these weighted edges:\n\n| Edge | Weight | Edge | Weight |\n|---|---:|---|---:|\n| A -> B | 4 | B -> E | 4 |\n| A -> C | 2 | E -> D | 1 |\n| C -> B | 1 | D -> F | 2 |\n| B -> D | 5 | E -> F | 7 |\n| C -> D | 9 | C -> F | 12 |\n\nWhat is the minimum total weight of a directed path from A to F?",
+      "choices": {
+        "A": "8",
+        "B": "10",
+        "C": "9",
+        "D": "11",
+        "E": "12"
+      }
+    },
+    {
+      "id": "M01",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "basic",
+      "question": "Two independent fair six-sided dice are rolled. Given that their sum is 8, what is the probability that at least one die shows a 3?",
+      "choices": {
+        "A": "1/5",
+        "B": "1/3",
+        "C": "2/5",
+        "D": "1/2",
+        "E": "3/5"
+      }
+    },
+    {
+      "id": "M02",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "basic",
+      "question": "Suppose 3x + 2y = 19 and x - y = 3. What is x^2 - y^2?",
+      "choices": {
+        "A": "15",
+        "B": "19",
+        "C": "25",
+        "D": "23",
+        "E": "21"
+      }
+    },
+    {
+      "id": "M03",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "applied",
+      "question": "A disease affects 1% of a population. A test has 90% sensitivity and 95% specificity. A randomly selected individual tests positive. What is the probability they actually have the disease?",
+      "choices": {
+        "A": "1/20",
+        "B": "2/13",
+        "C": "1/10",
+        "D": "1/5",
+        "E": "9/10"
+      }
+    },
+    {
+      "id": "M04",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "applied",
+      "question": "Four observations are 2, 4, 4, and 6. What is their sample variance, with the n-1 denominator?",
+      "choices": {
+        "A": "8/3",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "E": "8"
+      }
+    },
+    {
+      "id": "M05",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "stretch",
+      "question": "How many four-digit decimal strings can be formed using four distinct digits, with exactly two even digits and a nonzero first digit? The digit 0 is considered even.",
+      "choices": {
+        "A": "1800",
+        "B": "1920",
+        "C": "2040",
+        "D": "2160",
+        "E": "2400"
+      }
+    },
+    {
+      "id": "M06",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "stretch",
+      "question": "What is the smallest nonnegative integer n satisfying all three congruences: n = 2 (mod 5), n = 3 (mod 7), and n = 4 (mod 9)?",
+      "choices": {
+        "A": "87",
+        "B": "122",
+        "C": "192",
+        "D": "157",
+        "E": "227"
+      }
+    },
+    {
+      "id": "L01",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "basic",
+      "question": "All raals are sils. No sils are zeks. At least one raal exists. Which statement necessarily follows?",
+      "choices": {
+        "A": "At least one raal is not a zek.",
+        "B": "Every sil is a raal.",
+        "C": "No raal is a sil.",
+        "D": "Some zeks are raals.",
+        "E": "Some raal is a zek."
+      }
+    },
+    {
+      "id": "L02",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "basic",
+      "question": "Four tasks A, B, C, and D must be done in some order, each exactly once. A must occur before C. B must occur immediately before D. C cannot be last. Which sequence satisfies all three rules?",
+      "choices": {
+        "A": "B, D, A, C",
+        "B": "A, B, D, C",
+        "C": "A, C, B, D",
+        "D": "C, A, B, D",
+        "E": "B, A, D, C"
+      }
+    },
+    {
+      "id": "L03",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "applied",
+      "question": "Three people A, B, and C each make a statement that is either true or false.\n\nA says: \"B's statement is false.\"\nB says: \"C's statement is false.\"\nC says: \"Both A's and B's statements are false.\"\n\nWho is telling the truth?",
+      "choices": {
+        "A": "Only A",
+        "B": "A and C",
+        "C": "Only C",
+        "D": "Only B",
+        "E": "Nobody"
+      }
+    },
+    {
+      "id": "L04",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "applied",
+      "question": "Three switches P, Q, and R are each ON or OFF. Exactly two are ON. If P is ON, R must be ON. If Q is ON, R must be OFF. Which switch must be OFF?",
+      "choices": {
+        "A": "P",
+        "B": "No assignment can satisfy the rules",
+        "C": "R",
+        "D": "None is necessarily OFF",
+        "E": "Q"
+      }
+    },
+    {
+      "id": "L05",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "stretch",
+      "question": "Consider these four statements:\n\n1. Exactly two of these four statements are true.\n2. Statement 1 is false.\n3. Statement 2 is true.\n4. Statement 3 is false.\n\nWhich pair of statements is true?",
+      "choices": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4",
+        "E": "3 and 4"
+      }
+    },
+    {
+      "id": "L06",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "stretch",
+      "question": "How many binary strings of length 8 contain exactly three 1 bits, with no two 1 bits adjacent?",
+      "choices": {
+        "A": "10",
+        "B": "15",
+        "C": "20",
+        "D": "21",
+        "E": "24"
+      }
+    },
+    {
+      "id": "S01",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "basic",
+      "question": "An ideal 12-volt battery is connected across two resistors in parallel, one 3 ohms and the other 6 ohms. What total current does the battery supply?",
+      "choices": {
+        "A": "2 A",
+        "B": "3 A",
+        "C": "4 A",
+        "D": "9 A",
+        "E": "6 A"
+      }
+    },
+    {
+      "id": "S02",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "basic",
+      "question": "Hydrogen reacts with oxygen: 2 H2 + O2 -> 2 H2O. Initially 5 moles of H2 and 2 moles of O2 are available. If the limiting reactant is fully consumed, how many moles of water form?",
+      "choices": {
+        "A": "2",
+        "B": "4",
+        "C": "3",
+        "D": "5",
+        "E": "6"
+      }
+    },
+    {
+      "id": "S03",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "applied",
+      "question": "Two parents both have genotypes AaBb. The two genes assort independently, and uppercase alleles are dominant. What is the probability that their offspring has genotype aa and at least one dominant B allele?",
+      "choices": {
+        "A": "3/16",
+        "B": "1/8",
+        "C": "1/16",
+        "D": "1/4",
+        "E": "9/16"
+      }
+    },
+    {
+      "id": "S04",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "applied",
+      "question": "A sealed mineral sample originally contained 80 atoms of a radioactive parent isotope and zero atoms of its stable daughter product. It now has 20 parent atoms and 60 daughter atoms. Assume the daughter arises only from that decay and none has escaped. How many half-lives elapsed?",
+      "choices": {
+        "A": "1",
+        "B": "3",
+        "C": "2",
+        "D": "4",
+        "E": "6"
+      }
+    },
+    {
+      "id": "S05",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "stretch",
+      "question": "A pipeline has two stages. Stage 1 takes exactly 3 ms per item; Stage 2 takes exactly 7 ms per item. The stages can process different items concurrently; each stage processes one item at a time, in order. There is unlimited buffering and no overhead. Starting both stages idle, what minimum time is needed to finish 10 items?",
+      "choices": {
+        "A": "70 ms",
+        "B": "100 ms",
+        "C": "77 ms",
+        "D": "73 ms",
+        "E": "103 ms"
+      }
+    },
+    {
+      "id": "S06",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "stretch",
+      "question": "A channel independently flips each bit with probability 0.1. A sender transmits the same bit three times, and the receiver decodes by majority vote. What is the probability the decoded bit is incorrect?",
+      "choices": {
+        "A": "2.8%",
+        "B": "1.0%",
+        "C": "0.1%",
+        "D": "3.0%",
+        "E": "10.0%"
+      }
+    },
+    {
+      "id": "E01",
+      "domain": "E",
+      "domain_name": "Reading, evidence & data interpretation",
+      "tier": "basic",
+      "question": "A company processes requests as follows: Requests submitted before 16:00 on a business day are processed on the next business day. Requests submitted at or after 16:00 on a business day are processed on the second business day after submission. Business days are Monday–Friday. There are no holidays this week or next. A request is submitted Thursday at exactly 16:00. When will it be processed?",
+      "choices": {
+        "A": "Thursday",
+        "B": "Monday",
+        "C": "Saturday",
+        "D": "Friday",
+        "E": "Tuesday"
+      }
+    },
+    {
+      "id": "E02",
+      "domain": "E",
+      "domain_name": "Reading, evidence & data interpretation",
+      "tier": "basic",
+      "question": "A website has the following results:\n\n| Period | Visitors | Purchases |\n|---|---:|---:|\n| Week A | 200 | 20 |\n| Week B | 120 | 18 |\n\nEach purchase represents a distinct visitor. Which week has the higher visitor-to-purchase conversion rate, and by how many percentage points?",
+      "choices": {
+        "A": "A by 5 points",
+        "B": "A by 10 points",
+        "C": "B by 10 points",
+        "D": "B by 5 points",
+        "E": "Same rate"
+      }
+    },
+    {
+      "id": "E03",
+      "domain": "E",
+      "domain_name": "Reading, evidence & data interpretation",
+      "tier": "applied",
+      "question": "A study observes 120 students, who choose for themselves whether to use a study-planning application. Users score 8 points higher on average than nonusers. The study makes no statistical adjustment and does not randomly assign participation. Which conclusion is justified?",
+      "choices": {
+        "A": "The application causes an 8-point improvement.",
+        "B": "Every nonuser would gain 8 points by using the app.",
+        "C": "Users averaged 8 points higher, but causation is not established.",
+        "D": "Random assignment eliminated selection bias.",
+        "E": "Every application user outscored every nonuser."
+      }
+    },
+    {
+      "id": "E04",
+      "domain": "E",
+      "domain_name": "Reading, evidence & data interpretation",
+      "tier": "applied",
+      "question": "There are four editors and six manuscripts. Every editor reviewed at least one manuscript. No manuscript was reviewed by all four editors. Which statement must be true?",
+      "choices": {
+        "A": "Some manuscript was reviewed by all four editors.",
+        "B": "Each editor reviewed exactly one manuscript.",
+        "C": "No manuscript was reviewed by more than one editor.",
+        "D": "Some editor reviewed all six manuscripts.",
+        "E": "For each manuscript, at least one editor did not review it."
+      }
+    },
+    {
+      "id": "E05",
+      "domain": "E",
+      "domain_name": "Reading, evidence & data interpretation",
+      "tier": "stretch",
+      "question": "Two hospitals report:\n\n| Hospital | Mild cases recovered | Severe cases recovered |\n|---|---|---|\n| A | 90 of 100 | 1 of 10 |\n| B | 19 of 20 | 70 of 100 |\n\nWhich statement is correct?",
+      "choices": {
+        "A": "B has a higher rate in both groups, but A has a higher rate overall.",
+        "B": "B has a higher recovery rate in both groups and overall.",
+        "C": "A has a higher recovery rate in both groups and overall.",
+        "D": "A has a higher rate in both groups, but B has a higher rate overall.",
+        "E": "They have identical overall recovery rates."
+      }
+    },
+    {
+      "id": "E06",
+      "domain": "E",
+      "domain_name": "Reading, evidence & data interpretation",
+      "tier": "stretch",
+      "question": "A system audit states: \"Every cache entry written before noon was invalidated. Some entries written after noon were also invalidated. No invalidated entry can be served.\" Which conclusion necessarily follows?",
+      "choices": {
+        "A": "Every after-noon entry cannot be served.",
+        "B": "No after-noon entries were invalidated.",
+        "C": "Some before-noon entries were served.",
+        "D": "All cache entries were invalidated.",
+        "E": "At least one after-noon entry cannot be served."
+      }
+    }
+  ]
+}
