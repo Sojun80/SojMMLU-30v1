@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SojMMLU-30 v1/v2: dependency-free OpenAI-compatible benchmark runner."""
+"""SojMMLU-30 v1/v2/v3: dependency-free OpenAI-compatible benchmark runner."""
 import argparse
 import json
 import re
@@ -23,7 +23,7 @@ def request(url, payload, token, timeout):
 
 def grade(records, keys, version):
     groups = {g: {"correct": 0, "total": 0, "answered": 0, "errors": 0} for g in "CMLSE"}
-    tier_names = ("basic", "applied", "stretch") if version == "v1" else ("moderate", "hard", "challenge")
+    tier_names = ("basic", "applied", "stretch") if version == "v1" else (("moderate", "hard", "challenge") if version == "v2" else ("linked", "deep", "synthesis"))
     tiers = {t: {"correct": 0, "total": 0, "answered": 0, "errors": 0} for t in tier_names}
     for r in records:
         correct = r["answer"] == keys[r["id"]]["answer"]
@@ -37,7 +37,7 @@ def grade(records, keys, version):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--version", choices=("v1", "v2"), default="v1", help="Benchmark version (default v1)")
+    ap.add_argument("--version", choices=("v1", "v2", "v3"), default="v1", help="Benchmark version (default v1)")
     ap.add_argument("--endpoint", default="http://127.0.0.1:8001/v1")
     ap.add_argument("--model", required=True)
     ap.add_argument("--subset", choices=("smoke", "full"), default="full")
@@ -47,11 +47,11 @@ def main():
     ap.add_argument("--timeout", type=float, default=120.0)
     ap.add_argument("--api-key", default="")
     args = ap.parse_args()
-    base = HERE if args.version == "v1" else HERE / "v2"
+    base = HERE if args.version == "v1" else HERE / args.version
     questions = json.loads((base / "questions.json").read_text())["questions"]
     keys = json.loads((base / "answer_key.json").read_text())["answers"]
     if args.subset == "smoke":
-        baseline_tier = "basic" if args.version == "v1" else "moderate"
+        baseline_tier = {"v1": "basic", "v2": "moderate", "v3": "linked"}[args.version]
         questions = [q for q in questions if q["tier"] == baseline_tier]
     output_path = Path(args.output) if args.output else Path(f"sojmmlu-{args.version}-results.json")
     records = []
