@@ -1,0 +1,434 @@
+{
+  "benchmark": "SojMMLU-30v2",
+  "version": "2.0",
+  "kind": "original-mmlu-style",
+  "capabilities": {
+    "C": "Code & algorithms",
+    "M": "Mathematics & quantitative reasoning",
+    "L": "Logic & constraint solving",
+    "S": "Science & engineering",
+    "E": "Reading, evidence & interpretation"
+  },
+  "questions": [
+    {
+      "id": "C01",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "moderate",
+      "question": "What does this Python 3 program print?\n\n```python\nitems = [[2], [3]]\nshadow = items[:]\nitems[0].append(4)\nshadow[1] = [5]\nitems.append(shadow[0])\nprint(sum(map(sum, items)), sum(map(sum, shadow)))\n```",
+      "choices": {
+        "A": "(15, 11)",
+        "B": "(15, 9)",
+        "C": "(12, 11)",
+        "D": "(15, 15)",
+        "E": "(9, 11)"
+      }
+    },
+    {
+      "id": "C02",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "moderate",
+      "question": "An SQL database has `accounts(id)` containing ids 1, 2, 3, 4 and `transactions(account_id, amount)` containing these rows:\n\n| account_id | amount |\n|---:|---:|\n| 1 | 8 |\n| 1 | -3 |\n| 2 | NULL |\n| 2 | 5 |\n| 4 | -1 |\n\nUnder standard SQL NULL and LEFT JOIN semantics, which account IDs does this query return, in order?\n\n```sql\nSELECT a.id\nFROM accounts AS a\nLEFT JOIN transactions AS t ON a.id = t.account_id\nGROUP BY a.id\nHAVING COUNT(t.amount) >= 1\n   AND COALESCE(SUM(t.amount), 0) > 0\nORDER BY a.id;\n```",
+      "choices": {
+        "A": "1 only",
+        "B": "2 only",
+        "C": "1, 2, 3",
+        "D": "1, 2",
+        "E": "1, 2, 4"
+      }
+    },
+    {
+      "id": "C03",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "hard",
+      "question": "What does this Python 3 program print? The loop order matters.\n\n```python\ndp = [0] * 11\ndp[0] = 1\nfor total in range(1, 11):\n    for step in (2, 3, 5):\n        if total >= step:\n            dp[total] += dp[total - step]\nprint(dp[10])\n```",
+      "choices": {
+        "A": "12",
+        "B": "14",
+        "C": "4",
+        "D": "8",
+        "E": "10"
+      }
+    },
+    {
+      "id": "C04",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "hard",
+      "question": "A cache with capacity 3 starts empty and uses exact least-recently-used (LRU) eviction. Every access (hit or miss) makes the accessed key most recently used; a miss inserts the key, evicting the least recently used one only when full.\n\nFor the sequence `A B C A D B E A C B`, how many misses occur?",
+      "choices": {
+        "A": "8",
+        "B": "10",
+        "C": "9",
+        "D": "6",
+        "E": "7"
+      }
+    },
+    {
+      "id": "C05",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "challenge",
+      "question": "Let n be an integer at least 2. Each call to `work()` takes constant time, and no loop is optimized away. What is the tight asymptotic running time of this pseudocode?\n\n```text\ni = 1\nwhile i <= n:\n    j = 1\n    while j <= i:\n        k = 1\n        while k <= j:\n            work()\n            k = 2 * k\n        j = 2 * j\n    i = 2 * i\n```",
+      "choices": {
+        "A": "Theta(n)",
+        "B": "Theta((log n)^3)",
+        "C": "Theta(n log n)",
+        "D": "Theta((log n)^4)",
+        "E": "Theta((log n)^2)"
+      }
+    },
+    {
+      "id": "C06",
+      "domain": "C",
+      "domain_name": "Code & algorithms",
+      "tier": "challenge",
+      "question": "A directed graph has exactly these edges and positive integer weights:\n\n| Edge | Weight | Edge | Weight |\n|---|---:|---|---:|\n| A -> B | 8 | B -> E | 6 |\n| A -> C | 5 | C -> D | 11 |\n| C -> B | 2 | D -> E | 3 |\n| B -> D | 8 | D -> F | 11 |\n| C -> F | 24 | E -> F | 5 |\n\nYou must travel from A to F. You may use **at most one coupon**, which replaces the cost of one traversed edge of weight w by floor(w/2). All other edges cost their listed weights. What is the minimum total cost?",
+      "choices": {
+        "A": "15",
+        "B": "13",
+        "C": "14",
+        "D": "16",
+        "E": "17"
+      }
+    },
+    {
+      "id": "M01",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "moderate",
+      "question": "An urn contains 3 red and 5 blue balls. Three balls are drawn uniformly at random without replacement. Given that at least one drawn ball is red, what is the probability that exactly two are red?",
+      "choices": {
+        "A": "1/2",
+        "B": "15/56",
+        "C": "3/8",
+        "D": "5/14",
+        "E": "15/46"
+      }
+    },
+    {
+      "id": "M02",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "moderate",
+      "question": "Two real numbers satisfy x+y=11 and xy=24. What is x^4+y^4?",
+      "choices": {
+        "A": "5329",
+        "B": "4105",
+        "C": "4176",
+        "D": "4177",
+        "E": "4225"
+      }
+    },
+    {
+      "id": "M03",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "hard",
+      "question": "Two independent fair six-sided dice are rolled. Given that the **maximum** of the two results is exactly 5, what is the expected value of the **minimum** result?",
+      "choices": {
+        "A": "8/3",
+        "B": "3",
+        "C": "29/9",
+        "D": "25/9",
+        "E": "23/9"
+      }
+    },
+    {
+      "id": "M04",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "hard",
+      "question": "A rectangle has positive side lengths x and y, with x+y=20 and x >= 2y. What is the maximum possible area xy?",
+      "choices": {
+        "A": "80",
+        "B": "800/9",
+        "C": "90",
+        "D": "100",
+        "E": "400/9"
+      }
+    },
+    {
+      "id": "M05",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "challenge",
+      "question": "How many binary strings of length 12 contain **exactly four 1 bits** and have no adjacent 1 bits **when positions 12 and 1 are also considered adjacent**? Strings are distinguished by their numbered positions: rotations count as different strings.",
+      "choices": {
+        "A": "105",
+        "B": "126",
+        "C": "70",
+        "D": "84",
+        "E": "96"
+      }
+    },
+    {
+      "id": "M06",
+      "domain": "M",
+      "domain_name": "Mathematics & quantitative reasoning",
+      "tier": "challenge",
+      "question": "Starting at (0,0), a path takes only steps (1,0) and (0,1), ending at (6,5). It may never enter a point with y>x, and it **must pass through (3,2)**. How many distinct step sequences satisfy these conditions?",
+      "choices": {
+        "A": "60",
+        "B": "84",
+        "C": "42",
+        "D": "56",
+        "E": "70"
+      }
+    },
+    {
+      "id": "L01",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "moderate",
+      "question": "Exactly one of four boxes contains a coin. Each box bears a statement:\n\n1. \"The coin is in box 1.\"\n2. \"The coin is in box 2 or box 4.\"\n3. \"The coin is not in box 3.\"\n4. \"The coin is in box 1 or box 2.\"\n\nExactly **two** of these statements are true. Which box contains the coin?",
+      "choices": {
+        "A": "Box 4",
+        "B": "Box 2",
+        "C": "Box 3",
+        "D": "No box satisfies the rule",
+        "E": "Box 1"
+      }
+    },
+    {
+      "id": "L02",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "moderate",
+      "question": "Every eligible applicant has a verified email or manager approval (possibly both). No contractor has manager approval. At least one contractor is eligible.\n\nWhich statement necessarily follows?",
+      "choices": {
+        "A": "Every contractor is eligible.",
+        "B": "No employee has manager approval.",
+        "C": "All verified emails belong to contractors.",
+        "D": "At least one eligible contractor has a verified email.",
+        "E": "No eligible contractor exists."
+      }
+    },
+    {
+      "id": "L03",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "hard",
+      "question": "Five distinct tasks A, B, C, D, E must be performed exactly once each. The order must satisfy all four rules:\n\n- B occurs immediately before D.\n- A occurs before C.\n- D occurs before E.\n- C is not last.\n\nHow many valid task orders exist?",
+      "choices": {
+        "A": "6",
+        "B": "1",
+        "C": "3",
+        "D": "2",
+        "E": "4"
+      }
+    },
+    {
+      "id": "L04",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "hard",
+      "question": "Four switches P, Q, R, S are ON or OFF. Exactly two are ON. All three constraints hold:\n\n- If P is ON, then R is ON.\n- If Q is ON, then R is OFF.\n- S is ON **if and only if** exactly one of P and Q is ON.\n\nWhich pair of switches is ON?",
+      "choices": {
+        "A": "Q and R",
+        "B": "R and S",
+        "C": "P and Q",
+        "D": "P and R",
+        "E": "Q and S"
+      }
+    },
+    {
+      "id": "L05",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "challenge",
+      "question": "Four people A, B, C, D are each either always truthful or always lying in their **single** statement. Their statements are:\n\n- A: \"B and C have the same truth status.\"\n- B: \"Exactly two of us are truthful.\"\n- C: \"D is lying.\"\n- D: \"A is lying.\"\n\nWhich pair is truthful?",
+      "choices": {
+        "A": "A and C",
+        "B": "B and C",
+        "C": "B and D",
+        "D": "C and D",
+        "E": "A and B"
+      }
+    },
+    {
+      "id": "L06",
+      "domain": "L",
+      "domain_name": "Logic & constraint solving",
+      "tier": "challenge",
+      "question": "Six distinct tasks A, B, C, D, E, F must be performed in a single order. All constraints apply:\n\n- A must precede B.\n- C must occur immediately before D.\n- E must not be first or last.\n- F must occur after B.\n\nHow many of the 6! possible task orders satisfy every constraint?",
+      "choices": {
+        "A": "6",
+        "B": "8",
+        "C": "10",
+        "D": "16",
+        "E": "12"
+      }
+    },
+    {
+      "id": "S01",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "moderate",
+      "question": "An ideal 12 V source powers a **2-ohm resistor in series** with a parallel pair of **3-ohm** and **6-ohm** resistors. What is the power dissipated in the 6-ohm resistor?",
+      "choices": {
+        "A": "12 W",
+        "B": "6 W",
+        "C": "3 W",
+        "D": "4 W",
+        "E": "8 W"
+      }
+    },
+    {
+      "id": "S02",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "moderate",
+      "question": "The reaction is 2 Al + 3 Cl2 -> 2 AlCl3. Starting with 5 moles of aluminum and 6 moles of chlorine, with no other reactants, the process achieves a **75% yield** relative to its limiting reactant. How many moles of AlCl3 are actually produced?",
+      "choices": {
+        "A": "3.75",
+        "B": "4",
+        "C": "2",
+        "D": "3",
+        "E": "2.5"
+      }
+    },
+    {
+      "id": "S03",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "hard",
+      "question": "A vehicle begins at rest, accelerates at a constant +2 m/s^2 for 5 seconds, then immediately brakes at -2.5 m/s^2 until it stops. Motion remains along a straight line without reversing. What total distance does it travel?",
+      "choices": {
+        "A": "45 m",
+        "B": "40 m",
+        "C": "50 m",
+        "D": "60 m",
+        "E": "35 m"
+      }
+    },
+    {
+      "id": "S04",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "hard",
+      "question": "An insulated vessel contains **200 g of ice at 0 C**. Add **500 g of liquid water at 40 C**. Ignore vessel heat capacity and losses. Ice's latent heat of fusion is 334 J/g; liquid water's specific heat is 4.2 J/(g*C). After equilibrium, what is the final temperature, to two decimal places?",
+      "choices": {
+        "A": "0.00 C",
+        "B": "3.90 C",
+        "C": "8.00 C",
+        "D": "11.90 C",
+        "E": "5.85 C"
+      }
+    },
+    {
+      "id": "S05",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "challenge",
+      "question": "A job originally requires exactly **100 seconds**: stage A takes 40 s, B takes 30 s, and C takes 30 s. A new system makes A 4 times faster and B 3 times faster, with C unchanged, **but adds 5 seconds of overhead** per job that did not exist before. The stages run sequentially. What is the overall speedup relative to the original 100-second job?",
+      "choices": {
+        "A": "5/2",
+        "B": "5/4",
+        "C": "20/11",
+        "D": "3/2",
+        "E": "2"
+      }
+    },
+    {
+      "id": "S06",
+      "domain": "S",
+      "domain_name": "Science & engineering",
+      "tier": "challenge",
+      "question": "A service needs a working shared power supply **and at least two working sensors** among A, B, C. The supply works with probability 0.95. Conditional on supply working, the three sensors work independently, with probabilities 0.9, 0.9, and 0.8 respectively. A supply failure makes the service fail regardless of sensors. What is the overall probability the service works?",
+      "choices": {
+        "A": "0.9500",
+        "B": "0.9063",
+        "C": "0.9540",
+        "D": "0.855",
+        "E": "0.9000"
+      }
+    },
+    {
+      "id": "E01",
+      "domain": "E",
+      "domain_name": "Reading, evidence & interpretation",
+      "tier": "moderate",
+      "question": "A binary classifier flags 50 items as positive. Of those 50, exactly 30 are truly positive. The evaluation dataset contains **200 actual positive items** in total. What are precision and recall, in that order?",
+      "choices": {
+        "A": "60% precision; 15% recall",
+        "B": "60% precision; 30% recall",
+        "C": "30% precision; 15% recall",
+        "D": "75% precision; 15% recall",
+        "E": "15% precision; 60% recall"
+      }
+    },
+    {
+      "id": "E02",
+      "domain": "E",
+      "domain_name": "Reading, evidence & interpretation",
+      "tier": "moderate",
+      "question": "An organization grants access **if and only if** all relevant conditions are satisfied:\n\n- The applicant is either (a) an employee with manager approval or (b) a contractor with sponsor approval.\n- Anyone accessing a confidential project must have completed security training.\n- Suspended accounts never receive access.\n\nWhich applicant must receive access under these rules?",
+      "choices": {
+        "A": "An active employee with manager approval seeking a confidential project, without training.",
+        "B": "An active contractor with manager approval but no sponsor approval, seeking a nonconfidential project.",
+        "C": "An active contractor with sponsor approval seeking a nonconfidential project.",
+        "D": "An active employee with sponsor approval but no manager approval, seeking a nonconfidential project.",
+        "E": "A suspended contractor with sponsor approval and training seeking a confidential project."
+      }
+    },
+    {
+      "id": "E03",
+      "domain": "E",
+      "domain_name": "Reading, evidence & interpretation",
+      "tier": "hard",
+      "question": "A randomized study assigns **100** participants to treatment and **100** to control. In treatment, outcomes are observed for 80 participants, including 60 successes; 20 outcomes are missing. In control, outcomes are observed for 95 participants, including 60 successes; 5 outcomes are missing. Assume each missing outcome could independently be either success or failure.\n\nAcross **all randomized participants**, what is the tightest possible interval for treatment success rate minus control success rate, in **percentage points**?",
+      "choices": {
+        "A": "-20 to +5",
+        "B": "0 to +20",
+        "C": "-5 to +5",
+        "D": "+5 to +20",
+        "E": "-5 to +20"
+      }
+    },
+    {
+      "id": "E04",
+      "domain": "E",
+      "domain_name": "Reading, evidence & interpretation",
+      "tier": "hard",
+      "question": "An audit establishes these facts:\n\n1. Every server that sent a heartbeat was online at noon.\n2. Every server online at noon had **either** completed patching **or** was behind an isolation proxy (possibly both).\n3. No server behind an isolation proxy accepted public traffic.\n4. At least one server that sent a heartbeat accepted public traffic.\n\nWhich conclusion necessarily follows?",
+      "choices": {
+        "A": "Every patched server sent a heartbeat.",
+        "B": "Every online server accepted public traffic.",
+        "C": "Every server completed patching.",
+        "D": "At least one server that sent a heartbeat completed patching.",
+        "E": "No server used an isolation proxy."
+      }
+    },
+    {
+      "id": "E05",
+      "domain": "E",
+      "domain_name": "Reading, evidence & interpretation",
+      "tier": "challenge",
+      "question": "A security threat is present on **5%** of occasions. A detector triggers an alert with **80% sensitivity**, and triggers a false alert on **10%** of threat-free occasions.\n\nAfter an alert, there are two actions. **Intervene** costs 2 units if there is no threat and 0 if there is a threat. **Do not intervene** costs 7 units if there is a threat and 0 otherwise. Select the action with the lower expected cost.\n\nWhich pair gives the correct action and the probability of a real threat given the alert?",
+      "choices": {
+        "A": "Do not intervene; 8/27",
+        "B": "Intervene; 8/27",
+        "C": "Intervene; 2/5",
+        "D": "Do not intervene; 2/5",
+        "E": "Intervene; 4/27"
+      }
+    },
+    {
+      "id": "E06",
+      "domain": "E",
+      "domain_name": "Reading, evidence & interpretation",
+      "tier": "challenge",
+      "question": "Two classifiers were evaluated on a test population containing 90% group A and 10% group B, but the **deployment** population will contain 70% A and 30% B.\n\nTheir group-specific error rates, assumed unchanged at deployment, are:\n\n| Model | Group A error | Group B error |\n|---|---:|---:|\n| X | 2% | 20% |\n| Y | 5% | 10% |\n\nWhich model has lower expected error in deployment, and by how many **percentage points**?",
+      "choices": {
+        "A": "X by 1.7 points",
+        "B": "X by 0.9 points",
+        "C": "Y by 0.9 points",
+        "D": "Y by 1.7 points",
+        "E": "They tie"
+      }
+    }
+  ]
+}
