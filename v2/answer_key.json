@@ -1,0 +1,156 @@
+{
+  "benchmark": "SojMMLU-30v2",
+  "version": "2.0",
+  "answers": {
+    "C01": {
+      "answer": "A",
+      "explanation": "items refers to [2,4], [3], [2,4] and totals 15; shadow refers to [2,4], [5] and totals 11.",
+      "audit": "python-executable"
+    },
+    "C02": {
+      "answer": "D",
+      "explanation": "Account 1 has count 2/sum 5, account 2 count 1/sum 5; account 3 has no qualifying amount; account 4's sum is negative.",
+      "audit": "sqlite-executable"
+    },
+    "C03": {
+      "answer": "B",
+      "explanation": "The recurrence counts ordered sequences of 2-, 3-, and 5-steps reaching 10; dp[10] is 14.",
+      "audit": "python-executable"
+    },
+    "C04": {
+      "answer": "C",
+      "explanation": "The accesses miss except for the fourth access (A), resulting in 9 misses out of 10.",
+      "audit": "independent-lru-simulation"
+    },
+    "C05": {
+      "answer": "B",
+      "explanation": "For i=2^a, summing inner work over j=2^b gives sum_{b=0}^a (b+1)=Theta(a^2); summing a=0..log2(n) yields Theta((log n)^3).",
+      "audit": "symbolic-summation"
+    },
+    "C06": {
+      "answer": "A",
+      "explanation": "A->B->E->F costs 8+6+5=19; discount the weight-8 edge to 4 for cost 15. A->C->B->E->F also reaches 15; exhaustive path enumeration finds no better route.",
+      "audit": "exhaustive-directed-paths"
+    },
+    "M01": {
+      "answer": "E",
+      "explanation": "There are C(8,3)-C(5,3)=46 draws containing a red ball, of which C(3,2)C(5,1)=15 have exactly two red.",
+      "audit": "exact-combination-count"
+    },
+    "M02": {
+      "answer": "D",
+      "explanation": "The numbers are 3 and 8, hence 3^4+8^4=81+4096=4177.",
+      "audit": "algebraic-substitution"
+    },
+    "M03": {
+      "answer": "D",
+      "explanation": "The nine ordered rolls with maximum 5 have minimum values 1,2,3,4 each twice and 5 once, giving (2(1+2+3+4)+5)/9=25/9.",
+      "audit": "enumerated-sample-space"
+    },
+    "M04": {
+      "answer": "B",
+      "explanation": "Since y<=20/3<10, area y(20-y) increases throughout the feasible interval. At y=20/3 and x=40/3, area is 800/9.",
+      "audit": "calculus-and-boundary"
+    },
+    "M05": {
+      "answer": "A",
+      "explanation": "For cyclic nonadjacency with n=12,k=4, count n/(n-k)*C(n-k,k)=12/8*C(8,4)=105. Exhaustive enumeration confirms it.",
+      "audit": "4096-string-enumeration"
+    },
+    "M06": {
+      "answer": "E",
+      "explanation": "There are 5 admissible prefixes to (3,2) and 14 admissible suffixes to (6,5) from that point; 5*14=70. Exhaustive enumeration of all 11-step paths confirms this.",
+      "audit": "lattice-path-enumeration"
+    },
+    "L01": {
+      "answer": "A",
+      "explanation": "The truth counts for boxes 1,2,3,4 are respectively 3,3,0,2; only box 4 yields exactly two true statements.",
+      "audit": "four-case-truth-table"
+    },
+    "L02": {
+      "answer": "D",
+      "explanation": "The eligible contractor exists, lacks manager approval, and therefore must have a verified email.",
+      "audit": "first-order-logic"
+    },
+    "L03": {
+      "answer": "C",
+      "explanation": "The only valid orders are ABDCE, ACBDE, and BDACE.",
+      "audit": "120-permutation-enumeration"
+    },
+    "L04": {
+      "answer": "E",
+      "explanation": "Exhaustive truth-table checking finds exactly one valid assignment: P=OFF, Q=ON, R=OFF, S=ON.",
+      "audit": "16-assignment-enumeration"
+    },
+    "L05": {
+      "answer": "C",
+      "explanation": "The unique self-consistent truth assignment is A=false, B=true, C=false, D=true.",
+      "audit": "16-assignment-fixed-points"
+    },
+    "L06": {
+      "answer": "E",
+      "explanation": "Enumerating the 720 permutations and applying all four rules yields 12 valid orders.",
+      "audit": "720-permutation-enumeration"
+    },
+    "S01": {
+      "answer": "B",
+      "explanation": "The parallel pair is 2 ohms; total resistance is 4 ohms. Source current is 3 A, parallel voltage 6 V, and the 6-ohm branch consumes 6^2/6=6 W.",
+      "audit": "ohms-law-cross-check"
+    },
+    "S02": {
+      "answer": "D",
+      "explanation": "Chlorine limits production to 4 mol AlCl3; 75% of 4 is 3 mol.",
+      "audit": "stoichiometric-balance"
+    },
+    "S03": {
+      "answer": "A",
+      "explanation": "Acceleration covers (1/2)*2*5^2=25 m and gives speed 10 m/s; braking covers 10^2/(2*2.5)=20 m, total 45 m.",
+      "audit": "kinematics-two-phase"
+    },
+    "S04": {
+      "answer": "E",
+      "explanation": "Cooling warm water to 0 C releases 84,000 J. Melting ice consumes 66,800 J. Remaining 17,200 J heats 700 g of water by 17200/(700*4.2)=5.8503 C.",
+      "audit": "thermal-energy-balance"
+    },
+    "S05": {
+      "answer": "C",
+      "explanation": "New runtime is 40/4 + 30/3 + 30 + 5 = 55 seconds; speedup is 100/55=20/11.",
+      "audit": "amdahl-with-overhead"
+    },
+    "S06": {
+      "answer": "B",
+      "explanation": "Conditional sensor quorum success is .9*.9 + (.9*.1+.1*.9)*.8=.954. Multiplying by .95 supply reliability gives .9063.",
+      "audit": "independent-reliability-enumeration"
+    },
+    "E01": {
+      "answer": "A",
+      "explanation": "Precision is 30/50=60%; recall is 30/200=15%.",
+      "audit": "confusion-matrix-arithmetic"
+    },
+    "E02": {
+      "answer": "C",
+      "explanation": "Only the active contractor with sponsor approval and nonconfidential access meets all access conditions; the others violate at least one necessary rule.",
+      "audit": "policy-constraint-audit"
+    },
+    "E03": {
+      "answer": "E",
+      "explanation": "Treatment rate can be 60%..80%; control can be 60%..65%. Difference ranges from 60-65=-5 to 80-60=+20 points.",
+      "audit": "missing-outcome-bound-extremes"
+    },
+    "E04": {
+      "answer": "D",
+      "explanation": "A heartbeat server accepting public traffic is online; it cannot be behind isolation (premise 3); premise 2 then forces it to have completed patching.",
+      "audit": "four-premise-entailment"
+    },
+    "E05": {
+      "answer": "B",
+      "explanation": "P(threat|alert)=.05*.8/(.05*.8+.95*.1)=.04/.135=8/27. Intervene expected cost 2*(19/27)=38/27, below no intervention 7*(8/27)=56/27.",
+      "audit": "bayesian-risk-decision"
+    },
+    "E06": {
+      "answer": "C",
+      "explanation": "Deployment error: X=.7*.02+.3*.20=.074 (7.4%); Y=.7*.05+.3*.10=.065 (6.5%). Y is better by .9 points, even though X wins on the test mix.",
+      "audit": "stratified-weighted-errors"
+    }
+  }
+}
