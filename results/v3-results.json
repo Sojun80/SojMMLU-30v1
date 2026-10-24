@@ -2,9 +2,9 @@
   "benchmark": "SojMMLU-30",
   "version": "v3",
   "snapshot_date": "2026-10-24",
-  "key_path": "v3/answer_key.json",
+  "key_path": "Private evaluator-held V3 key (not published to this repository)",
   "source": "User-supplied benchmark runs and answers in conversation; exact model identifiers and run parameters are not always available. Scores matched to the frozen v3 key.",
-  "score_rules": "Only selected A-E letters count as correct. Null/missing are ungraded and count as not correct. First-pass correctness/skips separate from eventual correctness; unknown first-pass fields are null, not zero.",
+  "score_rules": "Score against private key. Correctness and missing IDs are published; neither correct answer letters nor submitted wrong letters are included. First-pass correctness/skips remain separate from final results. Unknown first-pass fields are null.",
   "records": [
     {
       "id": "composer_2_5",
@@ -13,7 +13,6 @@
       "final_correct": 30,
       "first_pass_correct": 30,
       "first_pass_answered": 30,
-      "wrong_answers": {},
       "note": "Reported exact-match 30/30; answer sheet not retained in this snapshot.",
       "final_answered": 30,
       "final_unanswered": [],
@@ -23,7 +22,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "gpt_5_mini",
@@ -32,7 +32,6 @@
       "final_correct": 30,
       "first_pass_correct": 30,
       "first_pass_answered": 30,
-      "wrong_answers": {},
       "note": "Reported exact-match 30/30.",
       "final_answered": 30,
       "final_unanswered": [],
@@ -42,7 +41,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "deepseek_v4_1_flash_local",
@@ -51,7 +51,6 @@
       "final_correct": 30,
       "first_pass_correct": 30,
       "first_pass_answered": 30,
-      "wrong_answers": {},
       "runtime_seconds": 386.83,
       "note": "30 completed, no missing responses or truncation; user-reported benchmark run.",
       "final_answered": 30,
@@ -62,7 +61,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "gemini_2_5_flash",
@@ -71,8 +71,7 @@
       "final_correct": 30,
       "first_pass_correct": 18,
       "first_pass_answered": 18,
-      "wrong_answers": {},
-      "note": "Initially omitted all 6 logic and 6 science questions. Follow-up supplied 12/12 correct.",
+      "note": "Initially omitted 12 questions (all Logic and Science), then completed them correctly.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -81,7 +80,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "minio_2_6_flash",
@@ -90,7 +90,6 @@
       "final_correct": 30,
       "first_pass_correct": null,
       "first_pass_answered": null,
-      "wrong_answers": {},
       "note": "Submitted 30/30 correct final answer sheet; initial completion before any delivery prompting not independently captured.",
       "final_answered": 30,
       "final_unanswered": [],
@@ -100,7 +99,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "swift_1_5_27b_dense_xtx",
@@ -109,13 +109,12 @@
       "final_correct": 30,
       "first_pass_correct": 30,
       "first_pass_answered": 30,
-      "wrong_answers": {},
       "runtime_seconds": 1027,
       "decode_tokens_per_second": 61.6,
       "output_tokens": 61637,
       "peak_vram_gib": 19.55,
       "mtp_acceptance_percent": 69.1,
-      "note": "V3 30/30; separately V1 29/30 on L04. Exact dense quantization filename not preserved in conversation.",
+      "note": "V3 perfect; separate V1 has one logic error.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -124,7 +123,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "swift_1_5_iq3s_xtx",
@@ -133,7 +133,6 @@
       "final_correct": 30,
       "first_pass_correct": 30,
       "first_pass_answered": 30,
-      "wrong_answers": {},
       "runtime_seconds": 1096,
       "decode_tokens_per_second": 55,
       "note": "All 30 response lines validated; all answer letters matched 30/30 reference.",
@@ -145,7 +144,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "qwen_iq3s_xtx",
@@ -154,7 +154,6 @@
       "final_correct": 30,
       "first_pass_correct": 30,
       "first_pass_answered": 30,
-      "wrong_answers": {},
       "runtime_seconds": 1216,
       "decode_tokens_per_second": 53.1,
       "note": "All 30 response lines validated; only discrepancy versus IQ2_XS was M06.",
@@ -166,7 +165,8 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": []
     },
     {
       "id": "qwen_iq2xs_xtx",
@@ -175,12 +175,9 @@
       "final_correct": 29,
       "first_pass_correct": 29,
       "first_pass_answered": 30,
-      "wrong_answers": {
-        "M06": "B"
-      },
       "runtime_seconds": 1155,
       "decode_tokens_per_second": 109.2,
-      "note": "M06 B instead of D (199 lattice paths); C05 correct after 25,222 output tokens for that question.",
+      "note": "One mathematics question incorrect. A coding question required 25,222 output tokens and approximately 181 seconds.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -189,7 +186,10 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "M06"
+      ]
     },
     {
       "id": "nemotron_unverified",
@@ -198,10 +198,7 @@
       "final_correct": 29,
       "first_pass_correct": 29,
       "first_pass_answered": 30,
-      "wrong_answers": {
-        "E05": "C"
-      },
-      "note": "Submitted as 'Nemotron 3.5 VL or some crap'; E05 chose 9/23, do not intervene instead of 153/199, intervene.",
+      "note": "One evidence/decision question incorrect. Exact model variant not recorded.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -210,7 +207,10 @@
         "L": 6,
         "S": 6,
         "E": 5
-      }
+      },
+      "missed_question_ids": [
+        "E05"
+      ]
     },
     {
       "id": "claude_sonnet_4_6_thinking",
@@ -219,10 +219,7 @@
       "final_correct": 29,
       "first_pass_correct": 29,
       "first_pass_answered": 30,
-      "wrong_answers": {
-        "S01": "C"
-      },
-      "note": "S01 explanatory numeric result (12 W, 54 W) was correct but selected C rather than matching option A. Output-transcription error.",
+      "note": "One answer-label mismatch despite a correct numerical explanation.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -231,7 +228,10 @@
         "L": 6,
         "S": 5,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "S01"
+      ]
     },
     {
       "id": "glm_5_2_high",
@@ -240,10 +240,7 @@
       "final_correct": 29,
       "first_pass_correct": 29,
       "first_pass_answered": 30,
-      "wrong_answers": {
-        "L06": "A"
-      },
-      "note": "L06 explanation correctly listed {BCF, BEF} but selected option A rather than B. Output-transcription error.",
+      "note": "One answer-label mismatch despite a correct reasoning explanation.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -252,7 +249,10 @@
         "L": 5,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "L06"
+      ]
     },
     {
       "id": "glm_5_3_flash_opencode",
@@ -261,10 +261,7 @@
       "final_correct": 29,
       "first_pass_correct": null,
       "first_pass_answered": null,
-      "wrong_answers": {
-        "C05": "E"
-      },
-      "note": "C05 got minimum cost 19 but counted one optimal path instead of two. Complete JSON sheet received; multiple OpenCode models reportedly needed prompting to return the sheet, so first-pass completion is not established.",
+      "note": "One coding question missed: counted too few optimal paths. OpenCode response delivery required additional prompting in related tests.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -273,7 +270,10 @@
         "L": 6,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "C05"
+      ]
     },
     {
       "id": "terra_light",
@@ -282,11 +282,10 @@
       "final_correct": 29,
       "first_pass_correct": 29,
       "first_pass_answered": 29,
-      "wrong_answers": {},
       "unanswered_final": [
         "S04"
       ],
-      "note": "S04 abstained after computing 12.57 C and finding no match; actual answer B is 12.41 C. One explicit null answer.",
+      "note": "One science question left unanswered after calculating a value that did not match the choices.",
       "final_answered": 29,
       "final_unanswered": [
         "S04"
@@ -297,7 +296,10 @@
         "L": 6,
         "S": 5,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "S04"
+      ]
     },
     {
       "id": "flint_free",
@@ -306,11 +308,7 @@
       "final_correct": 28,
       "first_pass_correct": null,
       "first_pass_answered": null,
-      "wrong_answers": {
-        "C06": "A",
-        "E03": "B"
-      },
-      "note": "All 30 final answers present. C06 and E03 wrong; exact first-pass delivery status not independently captured.",
+      "note": "Two incorrect answers, in coding and evidence.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -319,7 +317,11 @@
         "L": 6,
         "S": 6,
         "E": 5
-      }
+      },
+      "missed_question_ids": [
+        "C06",
+        "E03"
+      ]
     },
     {
       "id": "claude_haiku_4_5",
@@ -328,12 +330,7 @@
       "final_correct": 27,
       "first_pass_correct": 27,
       "first_pass_answered": 30,
-      "wrong_answers": {
-        "M05": "B",
-        "L01": "E",
-        "L05": "B"
-      },
-      "note": "Three errors in constrained counting/logic, independently re-enumerated against questions.",
+      "note": "Three constrained-counting/logic errors.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -342,7 +339,12 @@
         "L": 4,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "M05",
+        "L01",
+        "L05"
+      ]
     },
     {
       "id": "gpt_oss_120b",
@@ -351,14 +353,7 @@
       "final_correct": 25,
       "first_pass_correct": 24,
       "first_pass_answered": 29,
-      "wrong_answers": {
-        "C03": null,
-        "C06": null,
-        "M05": null,
-        "M06": null,
-        "L05": null
-      },
-      "note": "L06 omitted initially, later answered B correctly; five other misses remained. Exact wrong letters for five misses not preserved.",
+      "note": "One logic question initially omitted and answered on follow-up; five incorrect answers remained. Exact incorrect selections are not published.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -367,7 +362,14 @@
         "L": 5,
         "S": 6,
         "E": 6
-      }
+      },
+      "missed_question_ids": [
+        "C03",
+        "C06",
+        "M05",
+        "M06",
+        "L05"
+      ]
     },
     {
       "id": "big_pickle",
@@ -376,20 +378,7 @@
       "final_correct": 19,
       "first_pass_correct": 1,
       "first_pass_answered": 1,
-      "wrong_answers": {
-        "M03": "B",
-        "M04": "D",
-        "L01": "E",
-        "L03": "D",
-        "L05": "B",
-        "L06": "E",
-        "S02": "A",
-        "S04": "A",
-        "S06": "C",
-        "E01": "A",
-        "E06": "C"
-      },
-      "note": "Initial output solved only C01 using Python; user explicitly recorded 29 initial skips. Follow-up answered all 30 with 19 correct.",
+      "note": "Initially returned only one answer; 29 questions were omitted on the first response. Later completed the sheet.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -398,7 +387,20 @@
         "L": 2,
         "S": 3,
         "E": 4
-      }
+      },
+      "missed_question_ids": [
+        "M03",
+        "M04",
+        "L01",
+        "L03",
+        "L05",
+        "L06",
+        "S02",
+        "S04",
+        "S06",
+        "E01",
+        "E06"
+      ]
     },
     {
       "id": "beam_medium",
@@ -407,25 +409,7 @@
       "final_correct": 14,
       "first_pass_correct": 14,
       "first_pass_answered": 30,
-      "wrong_answers": {
-        "C04": "B",
-        "C06": "A",
-        "M03": "B",
-        "M04": "D",
-        "M05": "A",
-        "M06": "B",
-        "L02": "C",
-        "L03": "E",
-        "L05": "A",
-        "L06": "A",
-        "S01": "D",
-        "S04": "A",
-        "S05": "D",
-        "E03": "B",
-        "E04": "A",
-        "E06": "C"
-      },
-      "note": "User reported roughly four seconds for 30 answers; 16 wrong and no omissions. Timing not a controlled throughput measurement.",
+      "note": "All questions answered quickly; 16 incorrect. The claimed four-second time is anecdotal.",
       "final_answered": 30,
       "final_unanswered": [],
       "domain_scores": {
@@ -434,7 +418,25 @@
         "L": 2,
         "S": 3,
         "E": 3
-      }
+      },
+      "missed_question_ids": [
+        "C04",
+        "C06",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "L02",
+        "L03",
+        "L05",
+        "L06",
+        "S01",
+        "S04",
+        "S05",
+        "E03",
+        "E04",
+        "E06"
+      ]
     }
   ]
 }
