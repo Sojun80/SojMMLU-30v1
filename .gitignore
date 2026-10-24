@@ -1,0 +1,4 @@
+# Keep V3 evaluation answers local and private
+/v3/answer_key.json
+/v3/FRONTIER_ANSWER_KEY*
+**/*private*answer*key*
