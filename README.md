@@ -60,3 +60,7 @@ A result like 27/30 with C=6/6 and E=3/6 differs from 27/30 with C=3/6 and E=6/6
 ## Provenance
 
 Original SojBench-30 v1 questions curated in this conversation; answer-key review included direct arithmetic/constraint verification for combinatorics items M05 and L06. They are not official MMLU or MMLU-Pro questions.
+
+## Benchmark results
+
+See the [published leaderboard and XTX performance comparisons](results/README.md). The V3 grading key is held privately and is not included in this repository.
