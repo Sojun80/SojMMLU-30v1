@@ -38,10 +38,10 @@ Results snapshot: **2026-10-24**.
 
 - **Gemini 2.5 Flash:** 18 correct and 12 skipped on its first response; supplied the remaining 12 correctly in a follow-up. Eventual 30/30, but **not** a first-pass qualification.
 - **Big Pickle:** one question answered initially (C01), **29 initial skips**. The final 30-answer submission scored 19/30.
-- **GPT-OSS 120B:** initial L06 omission was subsequently answered correctly. Eventual 25/30.
-- **Claude Sonnet 4.6 Thinking (S01) and GLM 5.2 High (L06):** explanations computed the correct values but selected the wrong multiple-choice letters. Strictly 29/30.
-- **GLM 5.3 Flash via OpenCode Free:** C05 cost 19 was correct but it counted only one optimal path; the correct count is two.
-- **Terra Light:** S04 returned a calculated 12.57 C, stated none of the choices matched, and left its answer letter null. Correct is B, about 12.41 C.
+- **GPT-OSS 120B:** initial One omitted logic item was subsequently answered correctly. Eventual 25/30.
+- **Claude Sonnet 4.6 Thinking (S01) and GLM 5.2 High (L06):** explanations computed the correct values but selected the inconsistent answer labels. Strictly 29/30.
+- **GLM 5.3 Flash via OpenCode Free:** C05 found a minimum cost but undercounted optimal paths.
+- **Terra Light:** S04 reported a value inconsistent with the options and abstained from choosing a letter.
 - **OpenCode Free:** the user observed recurrent difficulty obtaining final answers from multiple models. Complete submitted sheets are archived, but the initial delivery/skip status for some is unknown.
 - **Beam Medium:** roughly four seconds reported for the 30-answer submission, 14/30 correct. Treat this speed as anecdotal, not controlled throughput.
 
@@ -74,9 +74,11 @@ The direct Vulkan and Strata CLI→Vulkan scores and speeds are nearly identical
 
 - [V3 machine-readable scores](v3-results.json): model labels, known wrong letters, score breakdowns, first-pass metadata, and run notes.
 - [XTX machine-readable run archive](xtx-2026-10-24.json): V1/V3 configurations, benchmark timing, throughput, tokens and errors.
-- [Frozen V3 questions](../v3/questions.json) and [V3 answer key](../v3/answer_key.json); [frozen V1 questions](../questions.json) and [V1 key](../answer_key.json).
+- [Frozen V3 questions](../v3/questions.json). The V3 answer key is privately held and **not included in this public repository**; [frozen V1 questions](../questions.json) and [V1 key](../answer_key.json).
 - Runner: [run_benchmark.py](../run_benchmark.py) (`--version v1` or `--version v3`; the answer key stays evaluator-only).
 
-**Provenance:** The results were reported by the user and coding agents in conversation, with several answer sheets directly graded against the benchmark key. This archive does not claim to contain all raw inference transcripts, host logs, exact checkpoint revisions, or original engine settings. Where these are missing, the record says so. Scores are not independently rerun on hardware.
+**Provenance:** The results were reported by the user and coding agents in conversation, with some answer sheets graded against a separately held private benchmark key. This archive does not claim to contain all raw inference transcripts, host logs, exact checkpoint revisions, or original engine settings. Where these are missing, the record says so. Scores are not independently rerun on hardware.
 
 **Next experiments mentioned, not yet reported:** Flint performance on XTX, local GLM through OhMyPi/Claude Code, and Claude Code harness comparison for XTX.
+
+**Answer-key policy:** V3 correct answer letters and full answer sheets are intentionally not published. Public data includes scores, missed item IDs, timings, configurations and first-pass completion. Historical GitHub commits may retain previously exposed content; removing a file from the current branch does not erase commit history.
