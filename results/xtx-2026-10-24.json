@@ -23,7 +23,8 @@
       "errors": 0,
       "runtime_seconds": 158.2,
       "decode_tokens_per_second": 99.4,
-      "output_tokens": 12796
+      "output_tokens": 12796,
+      "notes": ""
     },
     {
       "configuration": "Swift 1.5 IQ3_S / Strata native HIP",
@@ -34,7 +35,8 @@
       "errors": 0,
       "runtime_seconds": 222.5,
       "decode_tokens_per_second": 49.1,
-      "output_tokens": 8071
+      "output_tokens": 8071,
+      "notes": ""
     },
     {
       "configuration": "Qwen IQ3_S / Strata native HIP",
@@ -45,7 +47,8 @@
       "errors": 0,
       "runtime_seconds": 235.8,
       "decode_tokens_per_second": 49.2,
-      "output_tokens": 8766
+      "output_tokens": 8766,
+      "notes": ""
     },
     {
       "configuration": "Swift 1.5 27B dense / direct llama.cpp Vulkan",
@@ -56,12 +59,10 @@
       "errors": 0,
       "runtime_seconds": 127.318,
       "decode_tokens_per_second": 80.03,
-      "wrong_answers": {
-        "L04": "D"
-      },
-      "correct_answer": {
-        "L04": "E"
-      }
+      "incorrect_question_ids": [
+        "L04"
+      ],
+      "notes": ""
     },
     {
       "configuration": "Swift 1.5 27B dense / Strata CLI to llama.cpp Vulkan",
@@ -73,13 +74,10 @@
       "runtime_seconds": 128.368,
       "decode_tokens_per_second": 80.96,
       "output_tokens": 8521,
-      "wrong_answers": {
-        "L04": "D"
-      },
-      "correct_answer": {
-        "L04": "E"
-      },
-      "notes": "Extended CLI using external custom endpoint; exact prompts and deterministic settings reportedly matched direct Vulkan baseline."
+      "notes": "Extended CLI using external custom endpoint; exact prompts and deterministic settings reportedly matched direct Vulkan baseline.",
+      "incorrect_question_ids": [
+        "L04"
+      ]
     },
     {
       "configuration": "Swift 1.5 27B dense / llama.cpp HIP",
@@ -90,13 +88,10 @@
       "errors": 0,
       "runtime_seconds_approx": 170,
       "decode_tokens_per_second_approx": 62.2,
-      "wrong_answers": {
-        "L04": "D"
-      },
-      "correct_answer": {
-        "L04": "E"
-      },
-      "notes": "Approximate values from comparison summary; not provided at full precision."
+      "notes": "Approximate values from comparison summary; not provided at full precision.",
+      "incorrect_question_ids": [
+        "L04"
+      ]
     },
     {
       "configuration": "Swift 1.5 27B dense / vLLM ROCm",
@@ -107,13 +102,10 @@
       "errors": 0,
       "runtime_seconds_approx": 547,
       "decode_tokens_per_second_approx": 25,
-      "wrong_answers": {
-        "L04": "D"
-      },
-      "correct_answer": {
-        "L04": "E"
-      },
-      "notes": "Used conservative eager/BF16-KV configuration after MTP and INT8-KV settings failed sanity checks; not an optimized vLLM comparison."
+      "notes": "Used conservative eager/BF16-KV configuration after MTP and INT8-KV settings failed sanity checks; not an optimized vLLM comparison.",
+      "incorrect_question_ids": [
+        "L04"
+      ]
     }
   ],
   "v3_runs": [
@@ -148,13 +140,10 @@
       "errors": 0,
       "runtime_seconds": 1155,
       "decode_tokens_per_second": 109.2,
-      "wrong_answers": {
-        "M06": "B"
-      },
-      "correct_answer": {
-        "M06": "D"
-      },
-      "notes": "C05 correct; C05 required 25,222 generated tokens and ~181 seconds in this run."
+      "notes": "One question differed between quantizations.",
+      "incorrect_question_ids": [
+        "M06"
+      ]
     },
     {
       "configuration": "Qwen IQ3_S / Strata native HIP",
@@ -164,7 +153,7 @@
       "errors": 0,
       "runtime_seconds": 1216,
       "decode_tokens_per_second": 53.1,
-      "notes": "Only difference relative to Qwen IQ2_XS answer sheet was M06, corrected B to D."
+      "notes": "Only difference relative to Qwen IQ2_XS answer sheet was M06, One question differed between quantizations."
     }
   ],
   "protocol": {
