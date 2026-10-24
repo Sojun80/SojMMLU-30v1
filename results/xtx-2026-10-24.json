@@ -1,0 +1,183 @@
+{
+  "snapshot_date": "2026-10-24",
+  "subject": "RX 7900 XTX farewell benchmark series",
+  "provenance": "Measurements and scores supplied in user/agent reports in this conversation; raw host log files and model hashes not yet archived here.",
+  "hardware": {
+    "gpu": "AMD Radeon RX 7900 XTX",
+    "vram_gib": 24,
+    "cpu": "Intel Core i7-12700 (as reported)",
+    "system_ram_gib": 62
+  },
+  "software": {
+    "strata_cli": "0.2.2",
+    "strata_native_engine": "0.1.47 HIP",
+    "note": "No native Strata Vulkan LLM backend; Strata CLI external Vulkan integration used llama.cpp Vulkan server."
+  },
+  "v1_runs": [
+    {
+      "configuration": "Qwen IQ2_XS / Strata native HIP",
+      "model": "Qwen 3.8 Flash Next IQ2_XS",
+      "backend": "Strata HIP",
+      "score": 30,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 158.2,
+      "decode_tokens_per_second": 99.4,
+      "output_tokens": 12796
+    },
+    {
+      "configuration": "Swift 1.5 IQ3_S / Strata native HIP",
+      "model": "Swift 1.5 IQ3_S",
+      "backend": "Strata HIP",
+      "score": 30,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 222.5,
+      "decode_tokens_per_second": 49.1,
+      "output_tokens": 8071
+    },
+    {
+      "configuration": "Qwen IQ3_S / Strata native HIP",
+      "model": "Qwen 3.8 Flash Next IQ3_S",
+      "backend": "Strata HIP",
+      "score": 30,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 235.8,
+      "decode_tokens_per_second": 49.2,
+      "output_tokens": 8766
+    },
+    {
+      "configuration": "Swift 1.5 27B dense / direct llama.cpp Vulkan",
+      "model": "Swift 1.5 Qwen3.8-27B dense (quant filename unrecorded)",
+      "backend": "llama.cpp Vulkan",
+      "score": 29,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 127.318,
+      "decode_tokens_per_second": 80.03,
+      "wrong_answers": {
+        "L04": "D"
+      },
+      "correct_answer": {
+        "L04": "E"
+      }
+    },
+    {
+      "configuration": "Swift 1.5 27B dense / Strata CLI to llama.cpp Vulkan",
+      "model": "Swift 1.5 Qwen3.8-27B dense (quant filename unrecorded)",
+      "backend": "Strata CLI -> llama.cpp Vulkan",
+      "score": 29,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 128.368,
+      "decode_tokens_per_second": 80.96,
+      "output_tokens": 8521,
+      "wrong_answers": {
+        "L04": "D"
+      },
+      "correct_answer": {
+        "L04": "E"
+      },
+      "notes": "Extended CLI using external custom endpoint; exact prompts and deterministic settings reportedly matched direct Vulkan baseline."
+    },
+    {
+      "configuration": "Swift 1.5 27B dense / llama.cpp HIP",
+      "model": "Swift 1.5 Qwen3.8-27B dense (quant filename unrecorded)",
+      "backend": "llama.cpp HIP/ROCm",
+      "score": 29,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds_approx": 170,
+      "decode_tokens_per_second_approx": 62.2,
+      "wrong_answers": {
+        "L04": "D"
+      },
+      "correct_answer": {
+        "L04": "E"
+      },
+      "notes": "Approximate values from comparison summary; not provided at full precision."
+    },
+    {
+      "configuration": "Swift 1.5 27B dense / vLLM ROCm",
+      "model": "Swift 1.5 Qwen3.8-27B dense (quant filename unrecorded)",
+      "backend": "vLLM ROCm",
+      "score": 29,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds_approx": 547,
+      "decode_tokens_per_second_approx": 25,
+      "wrong_answers": {
+        "L04": "D"
+      },
+      "correct_answer": {
+        "L04": "E"
+      },
+      "notes": "Used conservative eager/BF16-KV configuration after MTP and INT8-KV settings failed sanity checks; not an optimized vLLM comparison."
+    }
+  ],
+  "v3_runs": [
+    {
+      "configuration": "Swift 1.5 27B dense / Vulkan",
+      "backend": "llama.cpp Vulkan",
+      "score": 30,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 1027,
+      "decode_tokens_per_second": 61.6,
+      "output_tokens": 61637,
+      "peak_vram_gib": 19.55,
+      "mtp_acceptance_percent": 69.1,
+      "notes": "30/30 vs previously validated IQ3_S answer sheet; separately V1 29/30 L04."
+    },
+    {
+      "configuration": "Swift 1.5 IQ3_S / Strata native HIP",
+      "backend": "Strata HIP",
+      "score": 30,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 1096,
+      "decode_tokens_per_second": 55,
+      "notes": "Perfect 30/30 answer sheet."
+    },
+    {
+      "configuration": "Qwen IQ2_XS / Strata native HIP",
+      "backend": "Strata HIP",
+      "score": 29,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 1155,
+      "decode_tokens_per_second": 109.2,
+      "wrong_answers": {
+        "M06": "B"
+      },
+      "correct_answer": {
+        "M06": "D"
+      },
+      "notes": "C05 correct; C05 required 25,222 generated tokens and ~181 seconds in this run."
+    },
+    {
+      "configuration": "Qwen IQ3_S / Strata native HIP",
+      "backend": "Strata HIP",
+      "score": 30,
+      "answered": 30,
+      "errors": 0,
+      "runtime_seconds": 1216,
+      "decode_tokens_per_second": 53.1,
+      "notes": "Only difference relative to Qwen IQ2_XS answer sheet was M06, corrected B to D."
+    }
+  ],
+  "protocol": {
+    "v1": "All 30 questions from frozen v1; model variants native Strata HIP used temperature 0, 32,768 max generation tokens, same prompts and key; runtime excludes cold model loading.",
+    "v3": "All 30 questions from frozen v3; independent requests on XTX, temperature 0, 32,768 token generation limit, raw reasoning counted in decode; 30/30 answer line completion for all three native Strata HIP variants.",
+    "notes": [
+      "Decode speed includes reasoning output and excludes prefill. Wall-clock benchmark time and simple token/s products need not align perfectly due to request and prompt overhead.",
+      "Cross-backend results are not always precisely matched in KV format, MTP and execution mode; especially vLLM ROCm, which was conservative.",
+      "Scores are reported from submitted answers; original full raw per-question logs remain with experiment runners unless uploaded to this repo."
+    ]
+  },
+  "outstanding": [
+    "Flint small-MoE performance test on XTX was planned, but no XTX result was reported in this snapshot.",
+    "Claude Code/OhMyPi harness comparisons with local models were planned, but have no measured XTX results in this snapshot."
+  ]
+}
